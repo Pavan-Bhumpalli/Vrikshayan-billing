@@ -1,4 +1,5 @@
 {
     "port":5000,
-    "mongodbURI":"mongodb+srv://root:root@vrikshyan.pmafidw.mongodb.net/?retryWrites=true&w=majority&appName=vrikshyan"
+    "mongodbURI":"mongodb+srv://root:root@vrikshyan.pmafidw.mongodb.net/?retryWrites=true&w=majority&appName=vrikshyan",
+    "jwtSecret":"vrikshyan"
 }
