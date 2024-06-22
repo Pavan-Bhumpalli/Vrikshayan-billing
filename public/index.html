@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vrikshyan</title>
+</head>
+<body>
+    <button id="btn">click</button>
+    <script>
+        document.getElementById('btn').addEventListener('click', async()=>{
+            let response=await fetch("/users")
+            let data=await response.json()
+            console.log(data);
+        });
+    </script>
+</body>
+</html>
