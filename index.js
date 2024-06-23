@@ -9,6 +9,10 @@ const StartFuncRegisterUser = require('./signUp-Login/register');
 const StartFuncGetAllUsers=require("./routes/getAllUsers");
 const StartFuncGetUserById=require("./routes/getUserById");
 const StartFuncDeleteUser = require("./routes/deleteUser");
+const StartFuncCreateCustomer = require("./routes/createCustomer");
+const StartFuncGetCustomers = require("./routes/getCustomers");
+const StartFuncAddMovieCount = require("./routes/addMovieCount"); 
+const StartFuncAddLunchCount = require("./routes/addLunchCount"); 
 
 const app = express();
 
@@ -34,6 +38,12 @@ app.get("/users",middleware, StartFuncGetAllUsers);
 app.get("/user/:id",middleware, StartFuncGetUserById);
 
 app.delete("/user/:id",middleware, StartFuncDeleteUser);
+
+app.post("/createCustomer",StartFuncCreateCustomer);
+app.get("/getCustomers",StartFuncGetCustomers);
+
+app.put("/customers/movies/:id",StartFuncAddMovieCount);
+app.put("/customers/lunch/:id",StartFuncAddLunchCount);
 
 
 app.listen(configJSON.port, () => {
