@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import image from '../images/logo.png';
 import { NavLink, Navigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const [data, setData] = useState({
     email: '',
     password: ''
   });
-  const [redirect, setRedirect] = useState(false); 
-  const [errors, setErrors] = useState({}); // State to handle errors
+  const [redirect, setRedirect] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const validate = () => {
     let errors = {};
@@ -20,7 +21,7 @@ const Login = () => {
       errors.password = "Password is required";
     }
     return errors;
-  }
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -32,12 +33,19 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:5000/login', data);
       localStorage.setItem('token', response.data.token);
-      alert("Login Successful");
-      setRedirect(true); 
+      Swal.fire({
+        title: "Login Successful!",
+        icon: "success"
+      });
+      setRedirect(true);
     } catch (error) {
       console.log('Error response:', error.response);
       setData({ email: '', password: '' });
-      alert('Login Failed: ' + (error.response.data || 'Unknown error'));
+      Swal.fire({
+        title: 'Login Failed',
+        text: error.response?.data || 'Unknown error',
+        icon: 'error'
+      });
     }
   };
 
@@ -47,8 +55,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex">
-      <div className="w-1/2 h-auto bg-cover bg-center" style={{ backgroundImage: `url(${image})` }}>
-      </div>
+      <div className="w-1/2 h-auto bg-cover bg-center" style={{ backgroundImage: `url(${image})` }}></div>
 
       <div className="w-1/2 flex flex-col justify-center items-center bg-white p-8" style={{ backgroundColor: "#93cf93" }}>
         <h1 className="text-3xl font-bold mb-8">Login</h1>
@@ -93,6 +100,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

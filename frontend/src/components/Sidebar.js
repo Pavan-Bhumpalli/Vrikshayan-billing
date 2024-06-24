@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'; // assuming you are using react-router-dom
-import dashboard from '../images/dashboard.png'
+import dashboard from '../images/dashboard.png';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -32,15 +32,15 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen w-72 text-white shadow-lg">
+    <div className="flex flex-col min-h-screen w-72 text-white shadow-lg">
       <div className="flex items-center justify-center h-30 text-white shadow-md">
         <a href="/dashboard">
-          <img src={dashboard} alt="logo" className='p-4'/>
+          <img src={dashboard} alt="logo" className="p-4" />
         </a>
       </div>
 
-      <nav className="flex-1 overflow-y-auto text-center pt-2" style={{ background: "linear-gradient(1deg, rgba(21, 128, 51, 1) 0%, rgba(34, 139, 34, 0.7) 100%)" }}>
-        <ul className="flex flex-col justify-evenly h-[80vh] overflow-y-auto">
+      <nav className="flex-1 text-center pt-2" style={{ background: "linear-gradient(1deg, rgba(21, 128, 51, 1) 0%, rgba(34, 139, 34, 0.7) 100%)" }}>
+        <ul className="flex flex-col justify-evenly h-full">
           <li className="px-4 py-2 text-[#481E14] font-bold text-lg">
             <span className='text-[24px]'>CUSTOMERS</span>
           </li>
@@ -58,7 +58,7 @@ const Sidebar = () => {
               }`}
             onClick={() => handleItemClick('details')}
           >
-            <a href="#details" className="flex justify-center items-center">
+            <a href="/details" className="flex justify-center items-center">
               <span className="">Details</span>
             </a>
           </li>
