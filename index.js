@@ -13,6 +13,7 @@ const StartFuncCreateCustomer = require("./routes/createCustomer");
 const StartFuncGetCustomers = require("./routes/getCustomers");
 const StartFuncAddMovieCount = require("./routes/addMovieCount"); 
 const StartFuncAddLunchCount = require("./routes/addLunchCount"); 
+const StartFuncTodayCustumers = require("./routes/today");
 
 const app = express();
 
@@ -44,6 +45,8 @@ app.get("/getCustomers",StartFuncGetCustomers);
 
 app.put("/customers/movies/:id",StartFuncAddMovieCount);
 app.put("/customers/lunch/:id",StartFuncAddLunchCount);
+
+app.get("/getCustomers/today", StartFuncTodayCustumers);
 
 
 app.listen(configJSON.port, () => {

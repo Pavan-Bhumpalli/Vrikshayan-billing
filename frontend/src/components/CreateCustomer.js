@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import Nav from './Sidebar';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const CreateCustomer = () => {
     const [data, setData] = useState({
         name: '',
-        phoneNumber: '',
-        peopleCount: ''  // default value for number fields
+        phoneNumber: 0,
+        peopleCount: 0,
+        activities:{
+            movieCount:0,
+            lunchCount:0
+        }
+        
     });
 
     const submitHandler = async (e) => {
@@ -14,8 +20,14 @@ const CreateCustomer = () => {
         try {
             // Post data to the server
             const response = await axios.post('http://localhost:5000/createCustomer', data);
-            console.log(data); // log server response
-            alert('Customer created successfully'); // show success message
+            console.log(data); 
+            Swal.fire({
+                title: "Customer Created Successfully!",
+                icon: "success",
+                
+              }).then(()=>{
+                window.location.href = "/details";
+              })
         } catch (error) {
             console.error('Error creating customer:', error);
             alert('Failed to create customer. Please try again later.'); // show error message
@@ -50,7 +62,6 @@ const CreateCustomer = () => {
                             <input
                                 type="text"  
                                 name="phoneNumber"
-                                value={data.phoneNumber}
                                 onChange={handleInputChange}
                                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500'
                             />
@@ -60,7 +71,6 @@ const CreateCustomer = () => {
                             <input
                                 type="number"
                                 name="peopleCount"
-                                value={data.peopleCount}
                                 onChange={handleInputChange}
                                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500'
                             />
