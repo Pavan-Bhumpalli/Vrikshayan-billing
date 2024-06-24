@@ -32,7 +32,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen w-72 text-white shadow-lg">
+    <div className="flex flex-col flex-shrink-0 min-h-screen w-72 text-white shadow-lg">
       <div className="flex items-center justify-center h-30 text-white shadow-md">
         <a href="/dashboard">
           <img src={dashboard} alt="logo" className="p-4" />
