@@ -2,8 +2,8 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
-import Dashboard from './components/Dashboard';
 import Sidebar from './components/Sidebar';
+import CreateCustomer from './components/CreateCustomer';
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/sidebar" element={<Sidebar/>}/>
+          <Route path="/dashboard" element={<Sidebar/>}/>
+          <Route path="/createCustomer" element={<CreateCustomer/>}/>
         </Routes>
       </BrowserRouter>
     </div>
