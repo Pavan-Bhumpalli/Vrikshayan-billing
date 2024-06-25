@@ -1,7 +1,7 @@
 const customer = require('../schema/custModel'); 
 const StartFunc = async (req, res) => {
     try {
-        const customers = await customer.find();
+        const customers = await customer.find().sort({ updatedAt: -1 });
         return res.status(200).send(customers);
     }
     catch (error) {
