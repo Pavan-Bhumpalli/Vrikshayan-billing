@@ -14,6 +14,8 @@ const StartFuncGetCustomers = require("./routes/getCustomers");
 const StartFuncAddMovieCount = require("./routes/addMovieCount"); 
 const StartFuncAddLunchCount = require("./routes/addLunchCount"); 
 const StartFuncTodayCustumers = require("./routes/today");
+const StartFuncGetCustomerById = require("./routes/getCustomerById");
+const StartFuncDeleteCustomerById = require("./routes/deleteCustomerById");
 
 const app = express();
 
@@ -42,9 +44,12 @@ app.delete("/user/:id",middleware, StartFuncDeleteUser);
 
 app.post("/createCustomer",StartFuncCreateCustomer);
 app.get("/getCustomers",StartFuncGetCustomers);
+app.get("/getCustomer/:id",StartFuncGetCustomerById);
+app.delete("/customer/:id",StartFuncDeleteCustomerById);
 
-app.put("/customers/movies/:id",StartFuncAddMovieCount);
-app.put("/customers/lunch/:id",StartFuncAddLunchCount);
+
+app.put("/customer/movies/:id",StartFuncAddMovieCount);
+app.put("/customer/lunch/:id",StartFuncAddLunchCount);
 
 app.get("/getCustomers/today", StartFuncTodayCustumers);
 
