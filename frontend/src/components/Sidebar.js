@@ -80,7 +80,7 @@ const Sidebar = () => {
               }`}
             onClick={() => handleItemClick('movies')}
           >
-            <a href="#movies" className="flex items-center gap-2">
+            <a href="/movies" className="flex items-center gap-2">
               <RiMovie2Fill className='inline w-6 h-6'/>
               <span className="">Movies</span>
             </a>
@@ -90,7 +90,7 @@ const Sidebar = () => {
               }`}
             onClick={() => handleItemClick('lunch')}
           >
-            <a href="#lunch" className="flex items-center gap-2">
+            <a href="/lunch" className="flex items-center gap-2">
             <PiBowlFoodBold className='inline w-7 h-7'/>
               <span className="">Lunch</span>
             </a>
