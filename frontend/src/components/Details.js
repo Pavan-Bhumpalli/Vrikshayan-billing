@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import QrCodeGeneration from './QrCodeGeneration'; // Assuming this is the correct path to your QrCodeGeneration component
+import bgImage from './background_id.png'; // Ensure to update the path to your background image
+import topImage from './top.png'; 
 
 const Details = () => {
   const [products, setProducts] = useState([]);
@@ -79,9 +81,9 @@ const Details = () => {
                   <td className="px-6 py-4">{product.peopleCount}</td>
                   <td className="px-6 py-4">{product.activities.movieCount}</td>
                   <td className="px-6 py-4">{product.activities.lunchCount}</td>
-                  <td className="px-6 py-4">{product.updatedAt.substring(0, 10)}</td>
+                  <td className="px-6 py-4">{product.createdAt.substring(0, 10)}</td>
                   <td className="px-6 py-4">
-                    <QrCodeGeneration id={product._id} name={product.name}/>
+                    <QrCodeGeneration id={product.pk} name={product.name} bgImage={bgImage} topImage={topImage}/>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
