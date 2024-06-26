@@ -38,10 +38,10 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col flex-shrink-0 min-h-screen w-72 text-white shadow-lg">
+    <div className="fixed flex flex-col flex-shrink-0 min-h-screen w-[20%] text-white shadow-lg">
       <div className="flex items-center justify-center h-30 text-white shadow-md">
         <a href="/dashboard">
-          <img src={dashboard} alt="logo" className="p-4" />
+          <img src={dashboard} alt="logo" className="p-4 object-contain"  />
         </a>
       </div>
 
@@ -52,7 +52,7 @@ const Sidebar = () => {
             <span className='text-[24px]'>CUSTOMERS</span>
           </li>
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'create' ? 'text-green-800 bg-white' : ' hover:bg-[green-500] text-white'
+            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'create' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
             onClick={() => handleItemClick('create')}
           >
