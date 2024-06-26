@@ -19,6 +19,7 @@ const StartFuncDeleteCustomerById = require("./routes/deleteCustomerById");
 const StartFuncCreateNursery = require("./routes/createNursery");
 const StartFuncGetNurseryItems = require("./routes/getNurseryItems");
 const StartFuncDeleteNurseryItem = require("./routes/deleteNurseryItem");
+const StartFuncAddNurseryCount = require("./routes/addNurseryCount");
 
 const app = express();
 
@@ -47,7 +48,7 @@ app.delete("/user/:id",middleware, StartFuncDeleteUser);
 
 app.post("/createCustomer",StartFuncCreateCustomer);
 app.get("/getCustomers",StartFuncGetCustomers);
-app.get("/getCustomer/:id",StartFuncGetCustomerById);
+app.get("/getCustomer/:pk",StartFuncGetCustomerById);
 app.delete("/customer/:id",StartFuncDeleteCustomerById);
 
 app.post("/createNurseryItem", StartFuncCreateNursery);
@@ -55,8 +56,9 @@ app.get("/getNurseryItems", StartFuncGetNurseryItems);
 app.delete("/NurseryItem/:id", StartFuncDeleteNurseryItem);
 
 
-app.put("/customer/movies/:id",StartFuncAddMovieCount);
-app.put("/customer/lunch/:id",StartFuncAddLunchCount);
+app.put("/customer/movies/:pk",StartFuncAddMovieCount);
+app.put("/customer/lunch/:pk",StartFuncAddLunchCount);
+app.put("/customer/nursery/:pk", StartFuncAddNurseryCount);
 
 app.get("/getCustomers/today", StartFuncTodayCustumers);
 
