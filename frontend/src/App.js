@@ -5,6 +5,8 @@ import Register from './components/Register';
 import Sidebar from './components/Sidebar';
 import CreateCustomer from './components/CreateCustomer';
 import Details from './components/Details';
+import Movie from './components/Movies';
+import Lunch from './components/Lunch';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/dashboard" element={<Sidebar/>}/>
           <Route path="/createCustomer" element={<CreateCustomer/>}/>
           <Route path="/details" element={<Details/>}/>
+          <Route path="/movies" element={<Movie/>}/>
+          <Route path='/lunch' element={<Lunch/>}/>
         </Routes>
       </BrowserRouter>
     </div>
