@@ -1,14 +1,13 @@
 const customer = require("../schema/custModel");
-const mongoose = require('mongoose');
 
 const StartFunc = async (request, response) => {
     try {
         const data = request.body;
-        const id = request.params.id;
+        const custPk = request.params.pk;
         const updateData = {
             "activities.lunchCount": data.lunchCount
         }
-        const customerData = await customer.findByIdAndUpdate(id, updateData, { new: true });
+        const customerData = await customer.findOneAndUpdate({ pk: custPk }, updateData, { new: true });
         
         if (!customerData) {
             return response.status(404).json({ message: "Customer not found" });

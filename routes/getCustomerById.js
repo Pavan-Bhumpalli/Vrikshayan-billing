@@ -1,8 +1,9 @@
 const customer = require('../schema/custModel'); 
-const StartFunc = async (req, res) => {
+
+const StartFuncGetCustomerById = async (req, res) => {
     try {
-        const custId = req.params.id;
-        const foundCustomer = await customer.findById(custId);
+        const custPk = req.params.pk; 
+        const foundCustomer = await customer.findOne({ pk: custPk }); 
         if (!foundCustomer) {
             return res.status(404).send("Customer not found");
         }
@@ -13,4 +14,4 @@ const StartFunc = async (req, res) => {
     }
 }
 
-module.exports = StartFunc;
+module.exports = StartFuncGetCustomerById;
