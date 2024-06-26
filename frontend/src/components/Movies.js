@@ -52,21 +52,23 @@ const Movie = () => {
   return (
     <div className="flex items-center h-screen">
       <Sidebar />
-      <div className='flex flex-col flex-1'>
+      <div className='flex flex-1 flex-col justify-center items-center  '>
         <form onSubmit={handleSubmit} className="flex flex-1 justify-center items-center">
           <input
             type="text"
             value={inputValue}
             onChange={handleChange}
-            className="mb-4 p-2 border rounded"
+            className=" p-2 border rounded"
             placeholder="Enter ID"
           />
-          <button type="submit" className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+          <div >
+          <button type="submit" className=" font-semibold ml-2 p-2 bg-[#2e7120] text-white rounded hover:bg-[#93c388] hover:text-black">
             Submit
           </button>
+          </div>
         </form>
         {customerData && (
-          <table className="bg-white border" id="table">
+          <table className="bg-white border " id="table">
             <tbody>
               <tr>
                 <th className="py-2 px-4 border">Id</th>
@@ -95,7 +97,7 @@ const Movie = () => {
                       className="p-2 border rounded"
                       placeholder="Enter movie count"
                     />
-                    <button type="submit" className="ml-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+                    <button type="submit" className="font-semibold ml-2 p-2 bg-[#2e7120] text-white rounded hover:bg-[#93c388] hover:text-black">
                       Update
                     </button>
                   </form>

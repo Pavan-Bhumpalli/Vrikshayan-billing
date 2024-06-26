@@ -52,16 +52,16 @@ const Lunch = () => {
   return (
     <div className="flex items-center h-screen">
       <Sidebar />
-      <div className='flex flex-col flex-1'>
+      <div className='flex flex-col justify-center items-center flex-1'>
         <form onSubmit={handleSubmit} className="flex flex-1 justify-center items-center">
           <input
             type="text"
             value={inputValue}
             onChange={handleChange}
-            className="mb-4 p-2 border rounded"
+            className=" p-2 border rounded"
             placeholder="Enter ID"
           />
-          <button type="submit" className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+          <button type="submit" className="p-2 ml-2 font-semibold bg-[#2e7120] text-white rounded hover:bg-[#93c388] hover:text-black">
             Submit
           </button>
         </form>
@@ -95,7 +95,7 @@ const Lunch = () => {
                       className="p-2 border rounded"
                       placeholder="Enter lunch count"
                     />
-                    <button type="submit" className="ml-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+                    <button type="submit" className="ml-2 p-2 font-semibold bg-[#2e7120] text-white rounded hover:bg-[#93c388] hover:text-black">
                       Update
                     </button>
                   </form>
