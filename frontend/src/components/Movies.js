@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { RiMovie2Fill } from 'react-icons/ri';
 
 const Movie = () => {
   const [inputValue, setInputValue] = useState('');
@@ -52,60 +53,69 @@ const Movie = () => {
   return (
     <div className="flex items-center h-screen">
       <Sidebar />
-      <div className='flex flex-1 flex-col justify-center items-center  '>
-        <form onSubmit={handleSubmit} className="flex flex-1 justify-center items-center">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleChange}
-            className=" p-2 border rounded"
-            placeholder="Enter ID"
-          />
-          <div >
-          <button type="submit" className=" font-semibold ml-2 p-2 bg-[#2e7120] text-white rounded hover:bg-[#93c388] hover:text-black">
-            Submit
-          </button>
+      <div className="w-[75%] mx-auto pl-72">
+        <div className="pb-2 bg-white shadow-xl rounded-2xl">
+          <div className="container flex flex-col items-center justify-center flex-1 p-4 mt-5 horizontal">
+            <div className={`mb-11 rounded-full h-12 w-12 flex flex-col items-center justify-center bg-green-600 text-white font-bold  border-green-600"}`}>
+              <span className="text-xl font-bold text-white"><RiMovie2Fill className='w-7 h-7'/></span>
+              <div className='absolute w-32 mt-16 text-xl font-bold text-center text-[#2e7120] uppercase'>Movies</div>
+            </div>
+            <form onSubmit={handleSubmit} className="flex items-center justify-center flex-1 ">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={handleChange}
+                className="p-2 border rounded "
+                placeholder="Enter ID"
+                autoFocus
+              />
+              <button type="submit" className="p-2 ml-2 font-semibold bg-[#2e7120] text-white rounded hover:bg-[#93c388] hover:text-black">
+                Submit
+              </button>
+            </form>
+            {customerData && (
+              <table className="mt-2 ml-5 bg-white border align-center w-[95%]" id="table">
+                <tbody>
+                  <tr>
+                    <th className="px-4 py-2 border">Id</th>
+                    <td className="px-4 py-2 border">{customerData._id}</td>
+                  </tr>
+                  <tr>
+                    <th className="px-4 py-2 border">Name</th>
+                    <td className="px-4 py-2 border">{customerData.name}</td>
+                  </tr>
+                  <tr>
+                    <th className="px-4 py-2 border">Mobile</th>
+                    <td className="px-4 py-2 border">{customerData.phoneNumber}</td>
+                  </tr>
+                  <tr>
+                    <th className="px-4 py-2 border">People Count</th>
+                    <td className="px-4 py-2 border">{customerData.peopleCount}</td>
+                  </tr>
+                  <tr>
+                    <th className="px-4 py-2 border">Movie Count</th>
+                    <td className="px-4 py-2 border">
+                      <form onSubmit={updateMoviesCount}>
+                        <input
+                          type="number"
+                          value={movieCount}
+                          onChange={handleCountChange}
+                          className="p-2 border rounded w-[45%]"
+                          placeholder="Enter lunch count"
+                          min={0}
+                          max={customerData.peopleCount} autoFocus
+                        />
+                        <button type="submit" className="ml-2 p-2 font-semibold bg-[#2e7120] text-white rounded hover:bg-[#93c388] hover:text-black">
+                          Update
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
           </div>
-        </form>
-        {customerData && (
-          <table className="bg-white border " id="table">
-            <tbody>
-              <tr>
-                <th className="py-2 px-4 border">Id</th>
-                <td className="py-2 px-4 border">{customerData._id}</td>
-              </tr>
-              <tr>
-                <th className="py-2 px-4 border">Name</th>
-                <td className="py-2 px-4 border">{customerData.name}</td>
-              </tr>
-              <tr>
-                <th className="py-2 px-4 border">Mobile</th>
-                <td className="py-2 px-4 border">{customerData.phoneNumber}</td>
-              </tr>
-              <tr>
-                <th className="py-2 px-4 border">People Count</th>
-                <td className="py-2 px-4 border">{customerData.peopleCount}</td>
-              </tr>
-              <tr>
-                <th className="py-2 px-4 border">Movie Count</th>
-                <td className="py-2 px-4 border">
-                  <form onSubmit={updateMoviesCount}>
-                    <input
-                      type="number"
-                      value={movieCount}
-                      onChange={handleCountChange}
-                      className="p-2 border rounded"
-                      placeholder="Enter movie count"
-                    />
-                    <button type="submit" className="font-semibold ml-2 p-2 bg-[#2e7120] text-white rounded hover:bg-[#93c388] hover:text-black">
-                      Update
-                    </button>
-                  </form>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        )}
+        </div>
       </div>
     </div>
   );

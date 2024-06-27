@@ -11,7 +11,7 @@ import Nursery  from './components/Nursery';
 
 function App() {
   return (
-    <div>
+    <div className='bg-slate-100'>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
