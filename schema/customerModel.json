@@ -23,9 +23,16 @@
             "lunchCount": {
                 "type": "Number"
             },
-            "nurseryCount": [{
-                "type": "mongoose.Schema.Types.Mixed"
-            }]
+            "nurseryCount": [
+                {
+                    "type": "mongoose.Schema.Types.Mixed"
+                }
+            ],
+            "diyCount": [
+                {
+                    "type": "mongoose.Schema.Types.Mixed"
+                }
+            ]
         }
     }
 }

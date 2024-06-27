@@ -22,6 +22,7 @@ const StartFuncDeleteNurseryItem = require("./routes/deleteNurseryItem");
 const StartFuncAddNurseryCount = require("./routes/addNurseryCount");
 const StartFuncGetNurseryItemByPk = require("./routes/getNurseryItemByPk");
 const StartFuncDeleteCustomerNurseryItem=require("./routes/deleteCustomerNurseryItem");
+const StartFuncAddDIYCount = require("./routes/addDIYCount");
 
 const app = express();
 
@@ -62,7 +63,9 @@ app.delete("/NurseryItem/:id", StartFuncDeleteNurseryItem);
 app.put("/customer/movies/:pk",StartFuncAddMovieCount);
 app.put("/customer/lunch/:pk",StartFuncAddLunchCount);
 app.put("/customer/nursery/:pk", StartFuncAddNurseryCount);
-app.delete("/customer/:pk/nursery/:pk", StartFuncDeleteCustomerNurseryItem);
+app.put("/customer/diy/:pk", StartFuncAddDIYCount);
+
+app.delete("/customer/:pk/nursery/:item_Pk", StartFuncDeleteCustomerNurseryItem);
 
 app.get("/getCustomers/today", StartFuncTodayCustumers);
 
