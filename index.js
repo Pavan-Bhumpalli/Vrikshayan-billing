@@ -28,6 +28,11 @@ const StartFuncCreateFarmProduce=require("./routes/createFarmProduce");
 const StartFuncGetFarmProduce=require("./routes/getFarmProduce");
 const StartFuncAddFarmProduceCount=require("./routes/addFarmProduceCount");
 
+const StartFuncCreateDIY = require("./routes/createDIY");
+const StartFuncGetDIYItems=require("./routes/getDIYItems");
+const StartFuncGetDIYItemByPk=require("./routes/getDIYItemByPk");
+const StartFuncDeleteDIYItemByPk=require("./routes/deleteDIYItemByPk")
+
 const app = express();
 
 mongoose.connect(configJSON.mongodbURI).then(() => {
@@ -68,6 +73,11 @@ app.put("/customer/movies/:pk",StartFuncAddMovieCount);
 app.put("/customer/lunch/:pk",StartFuncAddLunchCount);
 app.put("/customer/nursery/:pk", StartFuncAddNurseryCount);
 app.put("/customer/diy/:pk", StartFuncAddDIYCount);
+
+app.post("/createDIYItem", StartFuncCreateDIY);
+app.get("/getDIYItems", StartFuncGetDIYItems);
+app.get("/getDIYItem/:pk", StartFuncGetDIYItemByPk);
+app.delete("/diyItem/:pk", StartFuncDeleteDIYItemByPk);
 
 app.delete("/customer/:pk/nursery/:item_Pk", StartFuncDeleteCustomerNurseryItem);
 
