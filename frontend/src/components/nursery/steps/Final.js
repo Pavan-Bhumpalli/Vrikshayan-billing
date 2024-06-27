@@ -2,7 +2,7 @@ import DataTable from "react-data-table-component";
 import { useState } from "react";
 import axios from "axios";
 
-export default function Final() {
+export default function Final({Customer_pk}) {
   const columns = [
     {
       name: "Pk",
@@ -53,13 +53,12 @@ export default function Final() {
       total.innerText = 0;
     }
   }
-  const addItem =async (e) => {
+  const show =async (e) => {
     const res= await axios.get("http://localhost:5000/getNurseryItems");
     const name=document.getElementById("name");
     const price=document.getElementById("price");
     const pk=e.target.value;
-    
-
+    const item=res.data.find(item=>item.pk==pk);
   }
   return (
     <div className="container md:mt-10 ">
@@ -68,11 +67,11 @@ export default function Final() {
         <div>
             <form className="flex  items-center justify-between" onSubmit={submitHandler} >
               <label className="font-bold" >Pk</label>
-              <input type="number" className="shadow appearance-none border rounded w-16 p-2 " autoFocus onChange={addItem}/>
+              <input type="number" className="shadow appearance-none border rounded w-16 p-2 " autoFocus onChange={show}/>
               <label className="font-bold">Item Name</label>
               <input type="text" className="shadow appearance-none border rounded p-2 " id="name"/>
               <label className="font-bold">Quantity</label>
-              <input type="number" className="shadow appearance-none border rounded p-2 w-16" onChange={addTotal} />
+              <input type="number" className="shadow appearance-none border rounded p-2 w-16" onChange={addTotal} min={0} />
               <label className="font-bold " >Price</label>
               <input type="number" className="shadow appearance-none border rounded p-2 w-28" onChange={addTotal} id="price"/>
               <label className="font-bold ">Total</label>

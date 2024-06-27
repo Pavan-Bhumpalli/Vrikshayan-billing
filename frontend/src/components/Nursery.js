@@ -9,7 +9,6 @@ import Final from "./nursery/steps/Final";
 
 const Nursery = () => {
     const [currentStep, setCurrentStep] = useState(1);
-    const [userData, setUserData] = useState({});
     const [pk, setPk] = useState(0);
 
     const steps = [
@@ -22,14 +21,15 @@ const Nursery = () => {
         setCurrentStep(currentStep + 1);
     };
 
+
     const displayStep = (step) => {
         switch (step) {
             case 1:
-                return <Account onSubmit={setPk} />;
+                return <Account setPk={setPk} next={handleNext} />;
             case 2:
-                return <Details pk={pk} />;
+                return <Details pk={pk} next={handleNext}/>;
             case 3:
-                return <Final />;
+                return <Final Customer_pk={pk}/>;
             default:
                 return null;
         }
@@ -44,24 +44,24 @@ const Nursery = () => {
     };
 
     return (
-        <div className="flex  items-center h-screen">
+        <div className="flex items-center h-screen">
             <Sidebar />
-            <div className='w-[95%] mx-auto pl-72'>
-            <div className="pb-2 bg-white shadow-xl rounded-2xl ">
-                <div className="container mt-5 horizontal">
-                    <Stepper steps={steps} currentStep={currentStep} />
-                    <div className="p-10 my-10">
-                        <UseContextProvider>{displayStep(currentStep)}</UseContextProvider>
+            <div className="w-[95%] mx-auto pl-72">
+                <div className="pb-2 bg-white shadow-xl rounded-2xl">
+                    <div className="container mt-5 horizontal">
+                        <Stepper steps={steps} currentStep={currentStep} />
+                        <div className="p-10 my-10">
+                            <UseContextProvider>{displayStep(currentStep)}</UseContextProvider>
+                        </div>
                     </div>
+                    {currentStep !== steps.length && (
+                        <StepperControl
+                            handleClick={handleClick}
+                            currentStep={currentStep}
+                            steps={steps}
+                        />
+                    )}
                 </div>
-                {currentStep !== steps.length && (
-                    <StepperControl
-                        handleClick={handleClick}
-                        currentStep={currentStep}
-                        steps={steps}
-                    />
-                )}
-            </div>
             </div>
         </div>
     );

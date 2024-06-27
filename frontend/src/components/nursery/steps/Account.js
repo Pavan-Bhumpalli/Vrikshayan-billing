@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
+import Details from './Details';
 
-const Account = ({ onSubmit }) => {
-    const [username, setUsername] = useState('');
+const Account = ({ setPk, next }) => {
 
     const handleChange = (e) => {
-        setUsername(e.target.value);
+        setPk(e.target.value);
     };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(username);
-
+        next();
     };
 
     return (
         <div className="flex flex-col">
             <div className="flex-1 w-full mx-2">
-                <div className="h-6 mt-3 text-xs font-bold leading-8 text-gray-500 uppercase" >
+                <div className="h-6 mt-3 text-xs font-bold leading-8 text-gray-500 uppercase">
                     Id
                 </div>
                 <div className="flex p-1 my-2 bg-white border border-gray-200 rounded">
@@ -24,7 +22,6 @@ const Account = ({ onSubmit }) => {
                         <input
                             autoFocus
                             type="text"
-                            value={username}
                             onChange={handleChange}
                             placeholder="Enter Id"
                             className="w-full p-1 px-2 text-gray-800 outline-none appearance-none"
