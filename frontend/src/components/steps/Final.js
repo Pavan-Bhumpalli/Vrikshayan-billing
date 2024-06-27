@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { MdOutlineDelete } from 'react-icons/md';
 
 export default function Final({ Customer_pk }) {
   const columns = [
     {
       name: 'Pk',
-      selector: row => row.pk,
+      selector: row => row.item_Pk,
     },
     {
       name: 'ItemName',
@@ -25,6 +26,35 @@ export default function Final({ Customer_pk }) {
       name: 'Total',
       selector: row => row.price * row.quantity,
     },
+    {
+      name:"Delete",
+      cell: (row) => <button onClick={async () => {
+        try {
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              let val=[...data];
+              val=val.filter((item)=>item.item_Pk!==row.item_Pk);
+              setData(val);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+          });
+        } catch (err) {
+          console.log(err);
+        }
+        }}><MdOutlineDelete className='w-6 text-red-500 h-6'/></button>
+    }
   ];
 
   const [data, setData] = useState([]);
@@ -47,12 +77,12 @@ export default function Final({ Customer_pk }) {
 
   const submitHandler = e => {
     e.preventDefault();
-    const pk = e.target[0].value;
+    const item_Pk = e.target[0].value;
     const quantity = e.target[1].value;
     const total = document.getElementById('total');
 
 
-    setData([...data, { pk, name, quantity, price }]);
+    setData([...data, { item_Pk, name, quantity, price }]);
 
     e.target[0].value = '';
     e.target[1].value = '';
