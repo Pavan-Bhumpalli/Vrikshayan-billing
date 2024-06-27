@@ -1,11 +1,20 @@
 const item = require('../schema/custModel');
+
 const StartFunc = async (req, res) => {
     try {
-        const itemPk = req.params.pk;
-        const deletedItem = await item.activities.nurseryCount.findOneAndDelete({ pk: itemPk });
-        if (!deletedItem) {
+        const customerPk = req.params.pk;
+        const itemPk = req.params.item_Pk;
+
+        const updatedCustomer = await item.findOneAndUpdate(
+            { pk: customerPk },
+            { $pull: { 'activities.nurseryCount': { item_Pk: itemPk } } },
+            { new: true }
+        );
+
+        if (!updatedCustomer) {
             return res.status(404).send("Item not found");
         }
+
         return res.status(200).send("Item deleted successfully");
     } catch (error) {
         console.log(error);

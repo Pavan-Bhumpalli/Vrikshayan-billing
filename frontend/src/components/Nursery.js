@@ -5,7 +5,7 @@ import Stepper from './Stepper';
 import { UseContextProvider } from "./contexts/StepperContext";
 import Account from "./steps/Account";
 import Details from "./steps/Details";
-import Final from "./steps/Final";
+import FinalNursery from "./steps/FinalNursery";
 
 const Nursery = () => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -29,7 +29,7 @@ const Nursery = () => {
             case 2:
                 return <Details pk={pk} next={handleNext}/>;
             case 3:
-                return <Final Customer_pk={pk}/>;
+                return <FinalNursery Customer_pk={pk}/>;
             default:
                 return null;
         }
