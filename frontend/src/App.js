@@ -7,6 +7,7 @@ import CreateCustomer from './components/CreateCustomer';
 import Details from './components/Details';
 import Movie from './components/Movies';
 import Lunch from './components/Lunch';
+import Nursery  from './components/Nursery';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/details" element={<Details/>}/>
           <Route path="/movies" element={<Movie/>}/>
           <Route path='/lunch' element={<Lunch/>}/>
+          <Route path='/nursery' element={<Nursery/>}/>
         </Routes>
       </BrowserRouter>
     </div>
