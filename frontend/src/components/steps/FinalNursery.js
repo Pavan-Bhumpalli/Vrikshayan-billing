@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { MdOutlineDelete } from 'react-icons/md';
 
-export default function Final({ Customer_pk }) {
+export default function FinalNursery({ Customer_pk }) {
   const columns = [
     {
       name: 'Pk',

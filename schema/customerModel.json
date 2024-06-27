@@ -32,6 +32,11 @@
                 {
                     "type": "mongoose.Schema.Types.Mixed"
                 }
+            ],
+            "beverages": [
+                {
+                    "type": "mongoose.Schema.Types.Mixed"
+                }
             ]
         }
     }
