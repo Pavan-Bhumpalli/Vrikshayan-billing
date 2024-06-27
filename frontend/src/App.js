@@ -7,9 +7,11 @@ import CreateCustomer from './components/CreateCustomer';
 import Details from './components/Details';
 import Movie from './components/Movies';
 import Lunch from './components/Lunch';
-import Nursery  from './components/Nursery';
+import Nursery from './components/Nursery';
 import Billing from './components/Billing';
 import Diy from './components/Diy';
+import Bevarages from "./components/Beverages";
+
 
 function App() {
   return (
@@ -19,14 +21,15 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Sidebar/>}/>
-          <Route path="/createCustomer" element={<CreateCustomer/>}/>
-          <Route path="/details" element={<Details/>}/>
-          <Route path="/movies" element={<Movie/>}/>
-          <Route path='/lunch' element={<Lunch/>}/>
-          <Route path='/nursery' element={<Nursery/>}/>
-          <Route path='/billing' element={<Billing/>}/>
-          <Route path='/diy' element={<Diy/>}/>
+          <Route path="/dashboard" element={<Sidebar />} />
+          <Route path="/createCustomer" element={<CreateCustomer />} />
+          <Route path="/details" element={<Details />} />
+          <Route path="/movies" element={<Movie />} />
+          <Route path='/lunch' element={<Lunch />} />
+          <Route path='/nursery' element={<Nursery />} />
+          <Route path='/beverages' element={<Bevarages />} />
+          <Route path='/billing' element={<Billing />} />
+          <Route path='/diy' element={<Diy />} />
         </Routes>
       </BrowserRouter>
     </div>

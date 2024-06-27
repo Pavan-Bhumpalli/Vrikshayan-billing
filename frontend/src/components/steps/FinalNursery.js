@@ -53,7 +53,7 @@ export default function FinalNursery({ Customer_pk }) {
         } catch (err) {
           console.log(err);
         }
-        }}><MdOutlineDelete className='w-6 text-red-500 h-6'/></button>
+        }}><MdOutlineDelete className='w-6 h-6 text-red-500'/></button>
     }
   ];
 
@@ -156,7 +156,7 @@ export default function FinalNursery({ Customer_pk }) {
               />
 
               <label className="font-bold">Item Name</label>
-              <div className="p-2 border w-60 h-11 rounded shadow appearance-none" id="name">{name}</div>
+              <div className="p-2 border rounded shadow appearance-none w-60 h-11" id="name">{name}</div>
 
               <label className="font-bold">Quantity</label>
               <input
@@ -169,7 +169,7 @@ export default function FinalNursery({ Customer_pk }) {
               />
 
               <label className="font-bold">Price</label>
-              <div className="p-2 border w-16 h-11 rounded shadow appearance-none" id="price">{price}</div>
+              <div className="w-16 p-2 border rounded shadow appearance-none h-11" id="price">{price}</div>
 
               <label className="font-bold">Total</label>
               <div className="p-2 border rounded shadow w-28 h-11" id="total"></div>

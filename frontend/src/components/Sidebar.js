@@ -123,7 +123,7 @@ const Sidebar = () => {
               }`}
             onClick={() => handleItemClick('beverages')}
           >
-            <a href="#beverages" className="flex items-center gap-2">
+            <a href="/beverages" className="flex items-center gap-2">
               <RiDrinks2Fill className='inline w-6 h-6'/>
               <span className="">Beverages</span>
             </a>
