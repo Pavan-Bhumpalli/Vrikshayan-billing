@@ -111,7 +111,7 @@ const Sidebar = () => {
               }`}
             onClick={() => handleItemClick('diy')}
           >
-            <a href="#diy" className="flex items-center gap-2">
+            <a href="/diy" className="flex items-center gap-2">
               <FaPaintBrush className='inline w-6 h-6'/>
               <span className="">DIY</span>
             </a>
