@@ -6,6 +6,7 @@ import { UseContextProvider } from "./contexts/StepperContext";
 import Account from "./steps/Account";
 import Details from "./steps/Details";
 import FinalBilling from "./steps/FinalBilling";
+import { FaRupeeSign } from 'react-icons/fa';
 
 const Billing = () => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -47,7 +48,11 @@ const Billing = () => {
         <div className="flex items-center h-screen">
             <Sidebar />
             <div className="w-[95%] mx-auto pl-72">
-                <div className="pb-2 bg-white shadow-xl rounded-2xl">
+                <div className="flex flex-col items-center justify-center pb-2 bg-white shadow-xl rounded-2xl">
+                    <div className={`mt-8 mb-8 rounded-full h-12 w-12 flex flex-col items-center justify-center bg-green-600 text-white font-bold  border-green-600"}`}>
+                        <span className="text-xl font-bold text-white"><FaRupeeSign className='w-7 h-7' /></span>
+                        <div className='absolute w-32 mt-16 text-xl font-bold text-center text-[#2e7120] uppercase'>Billing</div>
+                    </div>
                     <div className="container mt-5 horizontal">
                         <Stepper steps={steps} currentStep={currentStep} />
                         <div className="p-10 my-10">
