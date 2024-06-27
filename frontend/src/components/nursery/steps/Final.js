@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default function Final({ Customer_pk }) {
   const columns = [
@@ -30,6 +31,7 @@ export default function Final({ Customer_pk }) {
   const [nursery, setNursery] = useState([]);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState(1);
 
   const pkRef = useRef(null);
 
@@ -49,12 +51,14 @@ export default function Final({ Customer_pk }) {
     const quantity = e.target[1].value;
     const total = document.getElementById('total');
 
+
     setData([...data, { pk, name, quantity, price }]);
 
     e.target[0].value = '';
     e.target[1].value = '';
     setName('');
     setPrice('');
+    setQuantity(1);
     total.innerText = '';
 
     pkRef.current.focus();
@@ -63,6 +67,7 @@ export default function Final({ Customer_pk }) {
   const addTotal = e => {
     const form = e.target.form;
     const quantity = parseInt(form[1].value);
+    setQuantity(quantity);
     const total = document.getElementById('total');
     console.log("quantity:", quantity, "price:", price);
     if (!isNaN(quantity) && !isNaN(price)) {
@@ -75,13 +80,32 @@ export default function Final({ Customer_pk }) {
   const show = e => {
     const pk = e.target.value;
     const item = nursery.find(item => item.nursery_pk == pk);
+    const total = document.getElementById('total');
     if (item) {
-      console.log("item:", item);
       setName(item.name);
       setPrice(item.cost);
+      total.innerText = item.cost;
     } else {
       setName('');
       setPrice('');
+      total.innerText = "";
+    }
+  };
+
+  const UpdateItems = async (e) => {
+    e.preventDefault();
+    try{
+      const res = await axios.put(`http://localhost:5000/customer/nursery/${Customer_pk}`, data);
+      Swal.fire({
+        text: "Nursery Items Updated Successfully!",
+        icon: "success"
+      }).then(() => {
+        window.location.reload(); 
+      }
+      )
+    }
+    catch(err){
+      console.log(err);
     }
   };
 
@@ -106,7 +130,9 @@ export default function Final({ Customer_pk }) {
 
               <label className="font-bold">Quantity</label>
               <input
+              id='quantityId'
                 type="number"
+                value={quantity}
                 className="w-16 p-2 border rounded shadow appearance-none"
                 onChange={addTotal}
                 min={0}
@@ -122,9 +148,11 @@ export default function Final({ Customer_pk }) {
             </form>
           </div>
           <DataTable columns={columns} data={data} />
+          <form onSubmit={UpdateItems}>
           <div className="flex flex-row-reverse">
-            <button className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold">Submit</button>
+            <button className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold" type='submit'>Submit</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
