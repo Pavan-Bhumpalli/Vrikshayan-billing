@@ -9,6 +9,7 @@ import Movie from './components/Movies';
 import Lunch from './components/Lunch';
 import Nursery  from './components/Nursery';
 import Billing from './components/Billing';
+import Diy from './components/Diy';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/lunch' element={<Lunch/>}/>
           <Route path='/nursery' element={<Nursery/>}/>
           <Route path='/billing' element={<Billing/>}/>
+          <Route path='/diy' element={<Diy/>}/>
         </Routes>
       </BrowserRouter>
     </div>
