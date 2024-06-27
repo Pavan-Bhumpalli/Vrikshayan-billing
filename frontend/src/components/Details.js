@@ -26,9 +26,9 @@ const Details = () => {
   }, []);
 
   return (
-    <div className="relative flex  overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="relative flex h-[100vh] overflow-x-auto shadow-md sm:rounded-lg">
       <Sidebar />
-      <div className="flex-1 ml-72 p-5 ">
+      <div className="flex-1 ml-72 p-5 justify-center items-center flex ">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

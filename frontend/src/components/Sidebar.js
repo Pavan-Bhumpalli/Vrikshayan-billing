@@ -100,7 +100,7 @@ const Sidebar = () => {
               }`}
             onClick={() => handleItemClick('nursery')}
           >
-            <a href="#nursery" className="flex items-center gap-2">
+            <a href="/nursery" className="flex items-center gap-2">
             <RiPlantFill className='inline w-7 h-7' />
               <span className="">Nursery</span>
             </a>

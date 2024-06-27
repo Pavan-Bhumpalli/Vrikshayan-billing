@@ -10,7 +10,7 @@ import Final from "./nursery/steps/Final";
 const Nursery = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState({});
-    const [customerData, setCustomerData] = useState(null); // Assuming this is where you store customer data
+    const [pk, setPk] = useState(0);
 
     const steps = [
         "Data Entry",
@@ -22,17 +22,12 @@ const Nursery = () => {
         setCurrentStep(currentStep + 1);
     };
 
-    const handleUpdateUserData = (data) => {
-        setUserData(data);
-        handleNext();
-    };
-
     const displayStep = (step) => {
         switch (step) {
             case 1:
-                return <Account onNext={handleUpdateUserData} />;
+                return <Account onSubmit={setPk} />;
             case 2:
-                return <Details userData={userData} />;
+                return <Details pk={pk} />;
             case 3:
                 return <Final />;
             default:
@@ -49,9 +44,10 @@ const Nursery = () => {
     };
 
     return (
-        <div className="flex items-center h-screen">
+        <div className="flex  items-center h-screen">
             <Sidebar />
-            <div className="w-1/2 pb-2 mx-auto bg-white shadow-xl rounded-2xl">
+            <div className='w-[95%] mx-auto pl-72'>
+            <div className="pb-2 bg-white shadow-xl rounded-2xl ">
                 <div className="container mt-5 horizontal">
                     <Stepper steps={steps} currentStep={currentStep} />
                     <div className="p-10 my-10">
@@ -65,6 +61,7 @@ const Nursery = () => {
                         steps={steps}
                     />
                 )}
+            </div>
             </div>
         </div>
     );
