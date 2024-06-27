@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
-import StepperControl from './nursery/StepperControl';
-import Stepper from './nursery/Stepper';
+import StepperControl from './StepperControl';
+import Stepper from './Stepper';
 import { UseContextProvider } from "./contexts/StepperContext";
-import Account from "./nursery/steps/Account";
-import Details from "./nursery/steps/Details";
-import Final from "./nursery/steps/Final";
+import Account from "./steps/Account";
+import Details from "./steps/Details";
+import Final from "./steps/Final";
 
 const Nursery = () => {
     const [currentStep, setCurrentStep] = useState(1);
