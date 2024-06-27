@@ -37,6 +37,11 @@
                 {
                     "type": "mongoose.Schema.Types.Mixed"
                 }
+            ],
+            "farmProduce":[
+                {
+                    "type": "mongoose.Schema.Types.Mixed"
+                }
             ]
         }
     }

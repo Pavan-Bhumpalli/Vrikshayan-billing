@@ -7,7 +7,7 @@ export default function FinalBilling({ Customer_pk }) {
   const columns = [
     {
       name: 'Pk',
-      selector: row => row.pk,
+      selector: row => row.produce_pk,
     },
     {
       name: 'ItemName',
@@ -28,18 +28,18 @@ export default function FinalBilling({ Customer_pk }) {
   ];
 
   const [data, setData] = useState([]);
-  const [nursery, setNursery] = useState([]);
+  const [billing, setBilling] = useState([]);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
 
   const pkRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('http://localhost:5000/getNurseryItems');
+      const res = await axios.get('http://localhost:5000/getFarmProduces');
       console.log("res:", res.data);
-      setNursery(res.data);
+      setBilling(res.data);
     };
 
     fetchData();
@@ -47,18 +47,18 @@ export default function FinalBilling({ Customer_pk }) {
 
   const submitHandler = e => {
     e.preventDefault();
-    const pk = e.target[0].value;
+    const produce_pk = e.target[0].value;
     const quantity = e.target[1].value;
     const total = document.getElementById('total');
 
 
-    setData([...data, { pk, name, quantity, price }]);
+    setData([...data, { produce_pk, name, quantity, price }]);
 
     e.target[0].value = '';
     e.target[1].value = '';
     setName('');
     setPrice('');
-    setQuantity(1);
+    setQuantity(0);
     total.innerText = '';
 
     pkRef.current.focus();
@@ -79,7 +79,8 @@ export default function FinalBilling({ Customer_pk }) {
 
   const show = e => {
     const pk = e.target.value;
-    const item = nursery.find(item => item.nursery_pk == pk);
+    console.log("billing data:", billing);
+    const item = billing.find(item => item.produce_pk == pk);
     const total = document.getElementById('total');
     if (item) {
       setName(item.name);
@@ -95,7 +96,7 @@ export default function FinalBilling({ Customer_pk }) {
   const UpdateItems = async (e) => {
     e.preventDefault();
     try{
-      const res = await axios.put(`http://localhost:5000/customer/nursery/${Customer_pk}`, data);
+      const res = await axios.put(`http://localhost:5000/customer/farmProduce/${Customer_pk}`, data);
       Swal.fire({
         text: "Nursery Items Updated Successfully!",
         icon: "success"

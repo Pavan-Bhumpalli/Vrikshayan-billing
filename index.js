@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const middleware=require("./middleware");
 const configJSON = require("./config.json");
+
 const StartFuncLoginUser = require('./signUp-Login/login');
 const StartFuncRegisterUser = require('./signUp-Login/register');
 const StartFuncGetAllUsers=require("./routes/getAllUsers");
@@ -23,6 +24,9 @@ const StartFuncAddNurseryCount = require("./routes/addNurseryCount");
 const StartFuncGetNurseryItemByPk = require("./routes/getNurseryItemByPk");
 const StartFuncDeleteCustomerNurseryItem=require("./routes/deleteCustomerNurseryItem");
 const StartFuncAddDIYCount = require("./routes/addDIYCount");
+const StartFuncCreateFarmProduce=require("./routes/createFarmProduce");
+const StartFuncGetFarmProduce=require("./routes/getFarmProduce");
+const StartFuncAddFarmProduceCount=require("./routes/addFarmProduceCount");
 
 const app = express();
 
@@ -66,6 +70,10 @@ app.put("/customer/nursery/:pk", StartFuncAddNurseryCount);
 app.put("/customer/diy/:pk", StartFuncAddDIYCount);
 
 app.delete("/customer/:pk/nursery/:item_Pk", StartFuncDeleteCustomerNurseryItem);
+
+app.post("/createFarmProduce",StartFuncCreateFarmProduce);
+app.get("/getFarmProduces",StartFuncGetFarmProduce);
+app.put("/customer/farmProduce/:pk", StartFuncAddFarmProduceCount);
 
 app.get("/getCustomers/today", StartFuncTodayCustumers);
 

@@ -30,6 +30,8 @@ const Sidebar = () => {
       setActiveItem('diy');
     } else if (path.includes('/beverages')) {
       setActiveItem('beverages');
+    }else if (path.includes('/billing')) {
+      setActiveItem('billing');
     }
   }, [location.pathname]);
 
@@ -127,9 +129,9 @@ const Sidebar = () => {
             </a>
           </li>
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'farm-picking' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
+            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'billing' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
-            onClick={() => handleItemClick('farm-picking')}
+            onClick={() => handleItemClick('billing')}
           >
             <a href="/billing" className="flex items-center gap-2">
               <FaRupeeSign className='inline w-6 h-6'/>

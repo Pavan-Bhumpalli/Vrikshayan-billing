@@ -1,0 +1,16 @@
+{
+    "produce_pk":
+    {
+        "type": "number"
+    
+    },
+    "name":
+    {
+        "type": "string",
+        "required": true
+    },
+    "price":{
+        "type": "number",
+        "required": true
+    }
+}
