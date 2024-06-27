@@ -20,6 +20,7 @@ const StartFuncCreateNursery = require("./routes/createNursery");
 const StartFuncGetNurseryItems = require("./routes/getNurseryItems");
 const StartFuncDeleteNurseryItem = require("./routes/deleteNurseryItem");
 const StartFuncAddNurseryCount = require("./routes/addNurseryCount");
+const StartFuncGetNurseryItemByPk = require("./routes/getNurseryItemByPk");
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.delete("/customer/:id",StartFuncDeleteCustomerById);
 
 app.post("/createNurseryItem", StartFuncCreateNursery);
 app.get("/getNurseryItems", StartFuncGetNurseryItems);
+app.get("/getNurseryItem/:pk", StartFuncGetNurseryItemByPk);
 app.delete("/NurseryItem/:id", StartFuncDeleteNurseryItem);
 
 
