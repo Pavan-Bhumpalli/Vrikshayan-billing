@@ -39,14 +39,14 @@ const Sidebar = () => {
 
   return (
     <div className="fixed flex flex-col flex-shrink-0 min-h-screen w-[20%] text-white shadow-lg">
-      <div className="flex items-center justify-center h-30 text-white shadow-md">
+      <div className="flex items-center justify-center text-white shadow-md h-30">
         <a href="/dashboard">
-          <img src={dashboard} alt="logo" className="p-4 object-contain"  />
+          <img src={dashboard} alt="logo" className="object-contain"/>
         </a>
       </div>
 
-      <nav className="flex-1 items-start pt-2" style={{ background: "linear-gradient(1deg, rgba(21, 128, 51, 1) 0%, rgba(34, 139, 34, 0.7) 100%)" }}>
-        <ul className="flex flex-col justify-evenly h-full items-start">
+      <nav className="items-start flex-1 pt-2" style={{ background: "linear-gradient(1deg, rgba(21, 128, 51, 1) 0%, rgba(34, 139, 34, 0.7) 100%)" }}>
+        <ul className="flex flex-col items-start h-full justify-evenly">
           <li className="px-4 py-2 text-[#481E14] font-bold text-lg">
 
             <span className='text-[24px]'>CUSTOMERS</span>
