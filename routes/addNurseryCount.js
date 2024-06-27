@@ -7,7 +7,7 @@ const StartFunc = async (request, response) => {
 
         const updateData = {
             $push: {
-                "activities.nurseryCount": data.item
+                "activities.nurseryCount":  { $each: data }
             }
         };
 
