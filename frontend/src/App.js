@@ -8,6 +8,7 @@ import Details from './components/Details';
 import Movie from './components/Movies';
 import Lunch from './components/Lunch';
 import Nursery  from './components/Nursery';
+import Billing from './components/Billing';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/movies" element={<Movie/>}/>
           <Route path='/lunch' element={<Lunch/>}/>
           <Route path='/nursery' element={<Nursery/>}/>
+          <Route path='/billing' element={<Billing/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -131,7 +131,7 @@ const Sidebar = () => {
               }`}
             onClick={() => handleItemClick('farm-picking')}
           >
-            <a href="#farm-picking" className="flex items-center gap-2">
+            <a href="/billing" className="flex items-center gap-2">
               <FaRupeeSign className='inline w-6 h-6'/>
               <span className="">Final Billing</span>
             </a>
