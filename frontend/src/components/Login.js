@@ -50,7 +50,7 @@ const Login = () => {
   };
 
   if (redirect) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/createCustomer" />;
   }
 
   return (

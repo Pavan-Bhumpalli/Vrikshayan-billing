@@ -23,7 +23,7 @@ const Register = () => {
       });
       console.log(response);
       // Optionally redirect after successful registration
-      // window.location.href = '/login';
+       window.location.href = '/login';
     } catch (error) {
       console.log('Error response:', error.response);
       Swal.fire({
