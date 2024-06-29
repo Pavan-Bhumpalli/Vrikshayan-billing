@@ -67,7 +67,7 @@ export default function FinalBilling({ Customer_pk }) {
   const [billing, setBilling] = useState([]);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   const pkRef = useRef(null);
 
@@ -90,10 +90,10 @@ export default function FinalBilling({ Customer_pk }) {
     setData([...data, { produce_pk, name, quantity, price }]);
 
     e.target[0].value = '';
-    e.target[1].value = '';
+    e.target[1].value = '1'; // Reset quantity to 1
     setName('');
     setPrice('');
-    setQuantity(0);
+    setQuantity(1); // Reset quantity state to 1
     total.innerText = '';
 
     pkRef.current.focus();
@@ -120,9 +120,13 @@ export default function FinalBilling({ Customer_pk }) {
     if (item) {
       setName(item.name);
       setPrice(item.price);
+      setQuantity(1); // Ensure the quantity is set to 1 when a new item is selected
+      total.innerText = Math.round(item.price);
     } else {
       setName('');
       setPrice('');
+      setQuantity(1); // Reset quantity to 1 if item not found
+      total.innerText = "";
     }
   };
 
@@ -139,6 +143,10 @@ export default function FinalBilling({ Customer_pk }) {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const calculateGrandTotal = () => {
+    return data.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   };
 
   return (
@@ -184,13 +192,16 @@ export default function FinalBilling({ Customer_pk }) {
             </form>
           </div>
           <DataTable columns={columns} data={data} />
-          <form onSubmit={UpdateItems}>
-            <div className="flex flex-row-reverse">
+          <div className="flex justify-between mt-4">
+            <div className="bg-gray-200 p-3 rounded-lg font-semibold">
+              Grand Total: {calculateGrandTotal()}
+            </div>
+            <form onSubmit={UpdateItems}>
               <button className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold" type="submit">
                 Submit
               </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>

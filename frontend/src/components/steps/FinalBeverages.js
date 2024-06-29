@@ -81,7 +81,6 @@ export default function FinalBeverages({ Customer_pk }) {
         const quantity = e.target[1].value;
         const total = document.getElementById('total');
 
-
         setData([...data, { item_Pk, name, quantity, price }]);
 
         e.target[0].value = '';
@@ -131,12 +130,14 @@ export default function FinalBeverages({ Customer_pk }) {
                 icon: "success"
             }).then(() => {
                 window.location.reload();
-            }
-            )
-        }
-        catch (err) {
+            });
+        } catch (err) {
             console.log(err);
         }
+    };
+
+    const calculateGrandTotal = () => {
+        return data.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     };
 
     return (
@@ -180,8 +181,11 @@ export default function FinalBeverages({ Customer_pk }) {
                     </div>
                     <DataTable columns={columns} data={data} />
                     <form onSubmit={UpdateItems}>
-                        <div className="flex flex-row-reverse mt-4">
-                            <button className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold" type='submit'>Submit</button>
+                        <div className="flex justify-between mt-4">
+                            <div className="bg-gray-200 p-3 rounded-lg font-semibold">
+                                Grand Total: {calculateGrandTotal()}
+                            </div>
+                            <button className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold" type='submit'>Submit</button>             
                         </div>
                     </form>
                 </div>

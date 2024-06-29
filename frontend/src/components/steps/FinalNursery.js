@@ -48,6 +48,8 @@ export default function FinalNursery({ Customer_pk }) {
                 text: "Your file has been deleted.",
                 icon: "success"
               });
+              // Recalculate grand total
+              setGrandTotal(val.reduce((acc, item) => acc + (item.price * item.quantity), 0));
             }
           });
         } catch (err) {
@@ -62,6 +64,7 @@ export default function FinalNursery({ Customer_pk }) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [grandTotal, setGrandTotal] = useState(0);
 
   const pkRef = useRef(null);
 
@@ -78,14 +81,17 @@ export default function FinalNursery({ Customer_pk }) {
   const submitHandler = e => {
     e.preventDefault();
     const item_Pk = e.target[0].value;
-    const quantity = e.target[1].value;
+    const quantity = parseInt(e.target[1].value);
     const total = document.getElementById('total');
 
-
-    setData([...data, { item_Pk, name, quantity, price }]);
+    const newItem = { item_Pk, name, quantity, price };
+    const updatedData = [...data, newItem];
+    
+    setData(updatedData);
+    setGrandTotal(updatedData.reduce((acc, item) => acc + (item.price * item.quantity), 0));
 
     e.target[0].value = '';
-    e.target[1].value = '';
+    e.target[1].value = 1; // Reset quantity to 1
     setName('');
     setPrice('');
     setQuantity(1);
@@ -114,7 +120,7 @@ export default function FinalNursery({ Customer_pk }) {
     if (item) {
       setName(item.name);
       setPrice(item.cost);
-      total.innerText = item.cost;
+      total.innerText = item.cost * 1; // Set initial total based on quantity 1
     } else {
       setName('');
       setPrice('');
@@ -165,7 +171,7 @@ export default function FinalNursery({ Customer_pk }) {
                 value={quantity}
                 className="w-16 p-2 border rounded shadow appearance-none"
                 onChange={addTotal}
-                min={0}
+                min={1} // Set minimum to 1
               />
 
               <label className="font-bold">Price</label>
@@ -178,11 +184,14 @@ export default function FinalNursery({ Customer_pk }) {
             </form>
           </div>
           <DataTable columns={columns} data={data} />
-          <form onSubmit={UpdateItems}>
-          <div className="flex flex-row-reverse">
-            <button className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold" type='submit'>Submit</button>
+          <div className="flex justify-between mt-4">
+            <div className="bg-gray-200 p-3 rounded-lg font-semibold">
+              Grand Total: {grandTotal}
+            </div>
+            <form onSubmit={UpdateItems}>
+              <button className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold" type='submit'>Submit</button>
+            </form>
           </div>
-          </form>
         </div>
       </div>
     </div>

@@ -3,20 +3,27 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const FinalDiy = ({ Customer_pk }) => {
-  const initialItems = [
-    { name: 'Item 1', count: 0, price: 100 },
-    { name: 'Item 2', count: 0, price: 50 },
-    { name: 'Item 3', count: 0, price: 80 },
-  ];
-
-  const [items, setItems] = useState(initialItems);
+  const [items, setItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [grandTotal, setGrandTotal] = useState(0);
 
   useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const res = await axios("http://localhost:5000/getDIYItems");
+        setItems(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchItems();
+  }, [Customer_pk]);
+
+  useEffect(() => {
     const calculateGrandTotal = () => {
       const total = selectedItems.reduce((acc, index) => {
-        return acc + (items[index].count * items[index].price);
+        return acc + (items[index].count * items[index].cost);
       }, 0);
       setGrandTotal(total);
     };
@@ -27,6 +34,11 @@ const FinalDiy = ({ Customer_pk }) => {
   const handleCheckboxChange = (index) => {
     setSelectedItems(prevSelectedItems => {
       if (prevSelectedItems.includes(index)) {
+        // Reset the count to 0 when deselected
+        const updatedItems = items.map((item, i) =>
+          i === index ? { ...item, count: 0 } : item
+        );
+        setItems(updatedItems);
         return prevSelectedItems.filter(itemIndex => itemIndex !== index);
       } else {
         return [...prevSelectedItems, index];
@@ -43,9 +55,8 @@ const FinalDiy = ({ Customer_pk }) => {
 
   const handleSubmit = async () => {
     const selectedData = items.filter((item, index) => selectedItems.includes(index));
-    console.log('Selected Items:', selectedData);
     try {
-      const res = await axios.put(`http://localhost:5000/customer/diy/${Customer_pk}`, selectedData);
+      await axios.put(`http://localhost:5000/customer/diy/${Customer_pk}`, selectedData);
       Swal.fire({
         text: "Nursery Items Updated Successfully!",
         icon: "success"
@@ -80,7 +91,7 @@ const FinalDiy = ({ Customer_pk }) => {
                   onChange={() => handleCheckboxChange(index)}
                 />
               </td>
-              <td className="py-2 px-4 border-b">{item.name}</td>
+              <td className="py-2 px-4 border-b"><center>{item.name}</center></td>
               <td className="py-2 px-4 border-b">
                 {selectedItems.includes(index) ? (
                   <input
@@ -90,25 +101,26 @@ const FinalDiy = ({ Customer_pk }) => {
                     onChange={(e) => handleCountChange(index, e.target.value)}
                   />
                 ) : (
-                  item.count
+                  <center>0</center>
                 )}
               </td>
-              <td className="py-2 px-4 border-b">{item.price}</td>
-              <td className="py-2 px-4 border-b">{item.count * item.price}</td>
+              <td className="py-2 px-4 border-b"><center>{item.cost}</center></td>
+              <td className="py-2 px-4 border-b">
+                <center>{selectedItems.includes(index) ? item.count * item.cost : 0}</center>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
       <div className="mt-4 flex justify-between">
+      <div className="bg-gray-200 p-3 rounded-lg font-semibold">
+        Grand Total: {grandTotal}
+      </div>
         <button
           className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold mt-4"
           onClick={handleSubmit}
         >
           Submit
-        </button>
-        <button
-          className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold mt-4">
-            {grandTotal}
         </button>
       </div>
     </div>
