@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from './Sidebar';
+import Sidebar from '../Sidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { RiMovie2Fill } from 'react-icons/ri';
@@ -22,7 +22,6 @@ const Movie = () => {
       }
       const data = await response.json();
       setCustomerData(data);
-      console.log(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }

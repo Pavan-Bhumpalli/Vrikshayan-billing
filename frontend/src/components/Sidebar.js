@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // assuming you are using react-router-dom
+import { useLocation } from 'react-router-dom';
 import dashboard from '../images/dashboard.png';
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoListCircle } from "react-icons/io5";
@@ -40,7 +40,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed flex flex-col flex-shrink-0 min-h-screen w-[20%] text-white shadow-lg">
+    <div className="fixed flex flex-col flex-shrink-0 min-h-screen w-1/5 text-white shadow-lg">
       <div className="flex items-center justify-center text-white shadow-md h-30">
         <a href="/dashboard">
           <img src={dashboard} alt="logo" className="object-contain"/>
@@ -54,7 +54,7 @@ const Sidebar = () => {
             <span className='text-[24px]'>CUSTOMERS</span>
           </li>
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'create' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
+            className={`px-4 py-2 cursor-pointer   text-[24px] w-full ${activeItem === 'create' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
             onClick={() => handleItemClick('create')}
           >
@@ -64,7 +64,7 @@ const Sidebar = () => {
             </a>
           </li>
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'details' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
+            className={`px-4 py-2 cursor-pointer   text-[24px] w-full ${activeItem === 'details' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
             onClick={() => handleItemClick('details')}
           >
@@ -78,7 +78,7 @@ const Sidebar = () => {
             <span className='text-[24px]'>ACTIVITIES</span>
           </li>
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'movies' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
+            className={`px-4 py-2 cursor-pointer   text-[24px] w-full ${activeItem === 'movies' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
             onClick={() => handleItemClick('movies')}
           >
@@ -88,7 +88,7 @@ const Sidebar = () => {
             </a>
           </li>
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'lunch' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
+            className={`px-4 py-2 cursor-pointer   text-[24px] w-full ${activeItem === 'lunch' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
             onClick={() => handleItemClick('lunch')}
           >
@@ -98,7 +98,7 @@ const Sidebar = () => {
             </a>
           </li>
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'nursery' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
+            className={`px-4 py-2 cursor-pointer   text-[24px] w-full ${activeItem === 'nursery' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
             onClick={() => handleItemClick('nursery')}
           >
@@ -109,7 +109,7 @@ const Sidebar = () => {
           </li>
           
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'diy' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
+            className={`px-4 py-2 cursor-pointer   text-[24px] w-full ${activeItem === 'diy' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
             onClick={() => handleItemClick('diy')}
           >
@@ -119,7 +119,7 @@ const Sidebar = () => {
             </a>
           </li>
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'beverages' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
+            className={`px-4 py-2 cursor-pointer   text-[24px] w-full ${activeItem === 'beverages' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
             onClick={() => handleItemClick('beverages')}
           >
@@ -129,7 +129,7 @@ const Sidebar = () => {
             </a>
           </li>
           <li
-            className={`px-4 py-2 cursor-pointer transition-colors duration-200 text-[24px] w-full ${activeItem === 'billing' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
+            className={`px-4 py-2 cursor-pointer   text-[24px] w-full ${activeItem === 'billing' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'
               }`}
             onClick={() => handleItemClick('billing')}
           >

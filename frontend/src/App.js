@@ -1,16 +1,16 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './components/User/Login';
+import Register from './components/User/Register';
 import Sidebar from './components/Sidebar';
-import CreateCustomer from './components/CreateCustomer';
-import Details from './components/Details';
-import Movie from './components/Movies';
-import Lunch from './components/Lunch';
-import Nursery from './components/Nursery';
-import Billing from './components/Billing';
-import Diy from './components/Diy';
-import Bevarages from "./components/Beverages";
+import CreateCustomer from './components/createCustomer/CreateCustomer';
+import Details from './components/Details/Details';
+import Movie from './components/Movies/Movies';
+import Lunch from './components/Lunch/Lunch';
+import Nursery from './components/Nursery/Nursery';
+import Billing from './components/FinalBilling/Billing';
+import Diy from './components/DIY/Diy';
+import Bevarages from "./components/Beverages/Beverages";
 
 
 function App() {

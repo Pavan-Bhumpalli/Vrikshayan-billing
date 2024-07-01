@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from './Sidebar';
+import Sidebar from '../Sidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { PiBowlFoodBold } from 'react-icons/pi';

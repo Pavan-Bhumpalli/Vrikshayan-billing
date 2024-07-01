@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Sidebar from './Sidebar'; // Assuming Sidebar is the correct component name
+import Sidebar from '../Sidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import QRCode from 'react-qr-code';
-import bgImage from './background_id.png'; // Ensure to update the path to your background image
-import topImage from './top.png'; // Ensure to update the path to your top image
+import bgImage from './Images/background_id.png';
+import topImage from './Images/top.png';
 
 const MySwal = withReactContent(Swal);
 
@@ -27,13 +27,13 @@ const CreateCustomer = () => {
             console.log(response.data);
 
             MySwal.fire({
-                title: "Vrikshayan",
                 html: (
-                    <div 
+                    <div className='flex justify-center'>
+                        <div 
                         id="printableArea" 
                         style={{ 
                             width: '50mm', 
-                            height: '85mm', 
+                            height: '85mm',     
                             backgroundImage: `url(${bgImage})`, 
                             backgroundSize: 'cover', 
                             display: 'flex', 
@@ -47,6 +47,7 @@ const CreateCustomer = () => {
                             <QRCode value={String(response.data.pk)} size={100} />
                             <p className='font-bold text-lg p-3' id='name'>{data.name}</p>
                         </div>
+                        </div>
                     </div>
                 ),
                 showCancelButton: true,
@@ -58,7 +59,6 @@ const CreateCustomer = () => {
                     document.body.innerHTML = printableArea.outerHTML;
 
                     const style = document.createElement('style');
-                    style.type = 'text/css';
                     style.media = 'print';
                     style.innerHTML = `
                       @media print {
@@ -97,7 +97,7 @@ const CreateCustomer = () => {
     return (
         <div className='flex'>
             <Sidebar />
-            <div className='h-screen flex justify-center items-center flex-1'>
+            <div className='h-screen flex justify-center items-center flex-1 ml-72'>
                 <div className='bg-[#b2dba9] p-10 rounded-lg shadow-2xl w-full max-w-xl'>
                     <h1 className='font-bold text-2xl'>Create Customer</h1>
                     <br></br>

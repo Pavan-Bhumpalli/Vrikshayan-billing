@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Sidebar from './Sidebar';
-import StepperControl from './StepperControl';
-import Stepper from './Stepper';
+import Sidebar from '../Sidebar';
+import StepperControl from './contexts/StepperControl';
+import Stepper from './contexts/Stepper';
 import { UseContextProvider } from "./contexts/StepperContext";
 import Account from "./steps/Account";
 import Details from "./steps/Details";
-import FinalNursery from "./steps/FinalNursery";
+import FinalNursery from "./steps/Final";
 import { RiPlantFill } from 'react-icons/ri';
 const Nursery = () => {
     const [currentStep, setCurrentStep] = useState(1);

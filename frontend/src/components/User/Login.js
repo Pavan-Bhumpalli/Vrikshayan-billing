@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import image from '../images/logo.png';
+import image from './Images/logo.png';
 import { NavLink, Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 

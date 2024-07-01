@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from './Sidebar';
-import QrCodeGeneration from './QrCodeGeneration'; // Assuming this is the correct path to your QrCodeGeneration component
-import bgImage from './background_id.png'; // Ensure to update the path to your background image
-import topImage from './top.png'; 
+import Sidebar from '../Sidebar';
+import QrCodeGeneration from './QrCodeGeneration'; 
+import bgImage from './Images/background_id.png';
+import topImage from './Images/top.png'; 
 
 const Details = () => {
   const [products, setProducts] = useState([]);
@@ -15,7 +15,7 @@ const Details = () => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setProducts(data); // Assuming data is an array of products
+        setProducts(data);
         console.log(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -26,7 +26,7 @@ const Details = () => {
   }, []);
 
   return (
-    <div className="relative flex h-[100vh] overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="relative flex overflow-x-auto shadow-md sm:rounded-lg">
       <Sidebar />
       <div className="flex-1 ml-72 p-5 justify-center items-center flex ">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

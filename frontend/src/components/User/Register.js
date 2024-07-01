@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import image from '../images/logo.png';
+import image from './Images/logo.png';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
