@@ -3,7 +3,7 @@ import Sidebar from '../Sidebar';
 import QrCodeGeneration from './QrCodeGeneration'; 
 import bgImage from './Images/background_id.png';
 import topImage from './Images/top.png'; 
-import DiyDetails from './DiyDetails';
+import ActivityInfo from './ActivityInfo';
 
 const Details = () => {
   const [products, setProducts] = useState([]);
@@ -98,10 +98,10 @@ const Details = () => {
                   <td className="px-6 py-4">{product.activities.movieCount}</td>
                   <td className="px-6 py-4">{product.activities.lunchCount}</td>
                   <td className="px-6 py-4">
-                  {product.activities.lunchCount}
+                  <ActivityInfo id={product.pk} type={"nursery"}/>
                   </td>
-                  <td className="px-6 py-4"><DiyDetails id={product.pk}/></td>
-                  <td className="px-6 py-4">{product.activities.lunchCount}</td>
+                  <td className="px-6 py-4"><ActivityInfo id={product.pk} type={"diy"}/></td>
+                  <td className="px-6 py-4"><ActivityInfo id={product.pk} type={"beverages"}/></td>
                   <td className="px-6 py-4">{product.createdAt.substring(0, 10)}</td>
                   <td className="px-6 py-4">
                     <QrCodeGeneration id={product.pk} name={product.name} bgImage={bgImage} topImage={topImage}/>
