@@ -3,6 +3,7 @@ import Sidebar from '../Sidebar';
 import QrCodeGeneration from './QrCodeGeneration'; 
 import bgImage from './Images/background_id.png';
 import topImage from './Images/top.png'; 
+import DiyDetails from './DiyDetails';
 
 const Details = () => {
   const [products, setProducts] = useState([]);
@@ -28,7 +29,7 @@ const Details = () => {
   return (
     <div className="relative flex overflow-x-auto shadow-md sm:rounded-lg">
       <Sidebar />
-      <div className="flex-1 ml-72 p-5 justify-center items-center flex ">
+      <div className="flex-1 p-5 justify-center items-center flex ">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -43,7 +44,7 @@ const Details = () => {
                 </th>
                 <th scope="col" className="px-6 py-3">
                   <div className="flex items-center">
-                    People Count
+                    Count
                   </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -58,12 +59,27 @@ const Details = () => {
                 </th>
                 <th scope="col" className="px-6 py-3">
                   <div className="flex items-center">
+                    Nursery
+                  </div>
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  <div className="flex items-center">
+                    DIY
+                  </div>
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  <div className="flex items-center">
+                    Beverages
+                  </div>
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  <div className="flex items-center">
                     Date
                   </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
                   <div className="flex items-center">
-                    Qr Code
+                    Qr
                   </div>
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -80,6 +96,11 @@ const Details = () => {
                   <td className="px-6 py-4">{product.phoneNumber}</td>
                   <td className="px-6 py-4">{product.peopleCount}</td>
                   <td className="px-6 py-4">{product.activities.movieCount}</td>
+                  <td className="px-6 py-4">{product.activities.lunchCount}</td>
+                  <td className="px-6 py-4">
+                  {product.activities.lunchCount}
+                  </td>
+                  <td className="px-6 py-4"><DiyDetails id={product.pk}/></td>
                   <td className="px-6 py-4">{product.activities.lunchCount}</td>
                   <td className="px-6 py-4">{product.createdAt.substring(0, 10)}</td>
                   <td className="px-6 py-4">

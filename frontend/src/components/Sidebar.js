@@ -40,7 +40,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed flex flex-col flex-shrink-0 min-h-screen w-1/5 text-white shadow-lg">
+    <div className="flex flex-col flex-shrink-0 min-h-screen w-1/5 text-white shadow-lg">
       <div className="flex items-center justify-center text-white shadow-md h-30">
         <a href="/dashboard">
           <img src={dashboard} alt="logo" className="object-contain"/>
