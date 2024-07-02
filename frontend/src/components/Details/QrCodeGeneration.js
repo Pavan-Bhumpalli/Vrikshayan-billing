@@ -41,6 +41,7 @@ function QrCodeGeneration({ id, name, bgImage, topImage }) {
     MySwal.fire({
       title: "Vrikshayan",
       html: (
+        <div className='flex justify-center'>
         <div 
           id="printableArea" 
           style={{ 
@@ -60,6 +61,7 @@ function QrCodeGeneration({ id, name, bgImage, topImage }) {
             <QRCode value={String(id)} size={100} />
             <p className='font-bold text-lg p-3' id='name'>{name}</p>
           </div>
+        </div>
         </div>
       ),
       showCancelButton: true,
