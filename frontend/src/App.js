@@ -11,6 +11,8 @@ import Nursery from './components/Nursery/Nursery';
 import Billing from './components/FinalBilling/Billing';
 import Diy from './components/DIY/Diy';
 import Bevarages from "./components/Beverages/Beverages";
+import AdminSidebar from './components/Admin/AdminSidebar';
+import Statistics from './components/Admin/Statistics';
 
 
 function App() {
@@ -21,7 +23,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Sidebar />} />
+          <Route path="/dashboard" element={<Statistics />} />
           <Route path="/createCustomer" element={<CreateCustomer />} />
           <Route path="/details" element={<Details />} />
           <Route path="/movies" element={<Movie />} />
