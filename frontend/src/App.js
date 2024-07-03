@@ -14,6 +14,7 @@ import Bevarages from "./components/Beverages/Beverages";
 import AdminSidebar from './components/Admin/AdminSidebar';
 import Statistics from './components/Admin/Statistics';
 import AllUsers from './components/Admin/AllUsers';
+import AdminActivities from './components/Admin/AdminActivities';
 
 
 function App() {
@@ -35,6 +36,10 @@ function App() {
           <Route path='/diy' element={<Diy />} />
           <Route path='/adminDashboard' element={<AdminSidebar />} />
           <Route path='/allusers' element={<AllUsers />} /> 
+          <Route path='/nurseryAdmin' element={<AdminActivities type={"getNurseryItems"} inp={"createNurseryItem"}/>}/>
+          <Route path='/diyAdmin' element={<AdminActivities type={"getDIYItems"} inp={"createDIYItem"}/>}/>
+          <Route path='/bevaragesAdmin' element={<AdminActivities type={"getBeverages"}  inp={"createBeverages"}/>}/>
+          <Route path='/farmProduceAdmin' element={<AdminActivities type={"getFarmProduces"} inp={"createFarmProduce"}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

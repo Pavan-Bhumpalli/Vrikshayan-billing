@@ -16,13 +16,15 @@ const AdminSidebar = () => {
     const path = location.pathname;
     if (path === '/allusers') {
       setActiveItem('users');
-    } else if (path === '/nursery') {
+    } else if (path === '/nurseryAdmin') {
       setActiveItem('nursery');
-    }else if(path === '/diy'){
+    }else if(path === '/diyAdmin'){
       setActiveItem('diy');
-    }else if (path.includes('/beverages')) {
+    }else if (path.includes('/bevaragesAdmin')) {
       setActiveItem('beverages');
-    } else if (path.includes('/statistics')) {
+    } else if (path.includes('/farmProduceAdmin')) {
+      setActiveItem('farmproduce');
+    }else if (path.includes('/statistics')) {
       setActiveItem('statistics');
     }
   }, [location.pathname]);
@@ -45,19 +47,19 @@ const AdminSidebar = () => {
             <FaUserAlt className='pt-1 w-6 h-6'/>
             <p>USERS</p>
           </a>
-          <a className={`flex gap-2 w-full p-4 ${activeItem === 'nursery' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('nursery')}>
+          <a href='/nurseryAdmin' className={`flex gap-2 w-full p-4 ${activeItem === 'nursery' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('nursery')}>
             <RiPlantFill className='inline w-7 h-7' />
             <p>NURSERY</p>
           </a>
-          <a className={`flex gap-2 w-full p-4 ${activeItem === 'diy' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('diy')}>
+          <a href='/diyAdmin' className={`flex gap-2 w-full p-4 ${activeItem === 'diy' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('diy')}>
             <FaPaintBrush className='inline w-6 h-6'/>
             <p>DIY</p>
           </a>
-          <a className={`flex gap-2 w-full p-4 ${activeItem === 'beverages' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('beverages')}>
+          <a href='/bevaragesAdmin' className={`flex gap-2 w-full p-4 ${activeItem === 'beverages' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('beverages')}>
             <RiDrinks2Fill className='inline w-6 h-6'/>
             <p>BEVERAGES</p>
           </a>
-          <a className={`flex gap-2 w-full p-4  ${activeItem === 'farmproduce' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('farmproduce')}>
+          <a href='/farmProduceAdmin' className={`flex gap-2 w-full p-4  ${activeItem === 'farmproduce' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('farmproduce')}>
             <GiFruitBowl className=' w-7 h-7'/>
             <p>FARM PRODUCE</p>
           </a>
