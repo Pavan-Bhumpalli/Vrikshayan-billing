@@ -98,10 +98,10 @@ const Details = () => {
                   <td className="px-6 py-4">{product.activities.movieCount}</td>
                   <td className="px-6 py-4">{product.activities.lunchCount}</td>
                   <td className="px-6 py-4">
-                  <ActivityInfo id={product.pk} type={"nursery"}/>
+                  <ActivityInfo id={product.pk} type={"nursery"} rowData={product}/>
                   </td>
-                  <td className="px-6 py-4"><ActivityInfo id={product.pk} type={"diy"}/></td>
-                  <td className="px-6 py-4"><ActivityInfo id={product.pk} type={"beverages"}/></td>
+                  <td className="px-6 py-4"><ActivityInfo id={product.pk} type={"diy"} rowData={product}/></td>
+                  <td className="px-6 py-4"><ActivityInfo id={product.pk} type={"beverages"} rowData={product}/></td>
                   <td className="px-6 py-4">{product.createdAt.substring(0, 10)}</td>
                   <td className="px-6 py-4">
                     <QrCodeGeneration id={product.pk} name={product.name} bgImage={bgImage} topImage={topImage}/>
