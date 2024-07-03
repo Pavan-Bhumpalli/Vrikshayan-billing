@@ -1,4 +1,4 @@
-const customer = require('../schema/custModel'); 
+const customer = require('../schema/JS/custModel'); 
 
 const StartFunc = async (req, res) => {
     try {
