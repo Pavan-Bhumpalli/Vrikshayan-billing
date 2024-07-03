@@ -47,7 +47,7 @@ const Bevarages = () => {
     return (
         <div className="flex items-center h-screen">
             <Sidebar />
-            <div className="w-[95%] mx-auto pl-72">
+            <div className="w-[70%] mx-auto">
             <div className="flex flex-col items-center justify-center pb-2 bg-white shadow-xl rounded-2xl">
                 <div className={`mt-8 mb-8 rounded-full h-12 w-12 flex flex-col items-center justify-center bg-green-600 text-white font-bold  border-green-600"}`}>
                         <span className="text-xl font-bold text-white"><RiDrinks2Fill className='w-7 h-7' /></span>
