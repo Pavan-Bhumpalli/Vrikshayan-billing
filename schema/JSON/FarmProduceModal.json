@@ -9,7 +9,7 @@
         "type": "string",
         "required": true
     },
-    "price":{
+    "cost":{
         "type": "number",
         "required": true
     }
