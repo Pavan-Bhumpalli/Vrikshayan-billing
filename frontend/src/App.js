@@ -13,6 +13,7 @@ import Diy from './components/DIY/Diy';
 import Bevarages from "./components/Beverages/Beverages";
 import AdminSidebar from './components/Admin/AdminSidebar';
 import Statistics from './components/Admin/Statistics';
+import AllUsers from './components/Admin/AllUsers';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Statistics />} />
+          <Route path="/dashboard" element={<Sidebar />} />
           <Route path="/createCustomer" element={<CreateCustomer />} />
           <Route path="/details" element={<Details />} />
           <Route path="/movies" element={<Movie />} />
@@ -32,6 +33,8 @@ function App() {
           <Route path='/beverages' element={<Bevarages />} />
           <Route path='/billing' element={<Billing />} />
           <Route path='/diy' element={<Diy />} />
+          <Route path='/adminDashboard' element={<AdminSidebar />} />
+          <Route path='/allusers' element={<AllUsers />} /> 
         </Routes>
       </BrowserRouter>
     </div>

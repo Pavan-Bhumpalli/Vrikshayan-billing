@@ -100,7 +100,7 @@ const CreateCustomer = () => {
     return (
         <div className='flex'>
             <Sidebar />
-            <div className='h-screen flex justify-center items-center flex-1 ml-72'>
+            <div className='h-screen flex justify-center items-center flex-1 '>
                 <div className='bg-[#b2dba9] p-10 rounded-lg shadow-2xl w-full max-w-xl'>
                     <h1 className='font-bold text-2xl'>Create Customer</h1>
                     <br></br>

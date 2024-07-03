@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import logo from '../../images/dashboard.png'
+import { FaUserAlt } from "react-icons/fa";
+import { GiFruitBowl } from "react-icons/gi";
+import {RiPlantFill, RiDrinks2Fill } from "react-icons/ri";
+import { FaPaintBrush } from "react-icons/fa";
+import { BsGraphUpArrow } from "react-icons/bs";
 
 const AdminSidebar = () => {
 
@@ -9,11 +14,13 @@ const AdminSidebar = () => {
 
   useEffect(() => {
     const path = location.pathname;
-    if (path === '/user') {
-      setActiveItem('user');
+    if (path === '/allusers') {
+      setActiveItem('users');
     } else if (path === '/nursery') {
       setActiveItem('nursery');
-    } else if (path.includes('/beverages')) {
+    }else if(path === '/diy'){
+      setActiveItem('diy');
+    }else if (path.includes('/beverages')) {
       setActiveItem('beverages');
     } else if (path.includes('/statistics')) {
       setActiveItem('statistics');
@@ -26,26 +33,38 @@ const AdminSidebar = () => {
 
   
   return (
-    <div className='flex flex-col items-center h-[100vh] w-[18rem]'>
+    <div className='flex flex-col items-center  w-[18rem] min-h-screen '>
         <div className='w-full h-[100px]'> 
             <img src={logo} alt='logo' className='w-full h-full'/>
         </div>
-        <div className='flex flex-col justify-evenly items-center text-xl text-white font-medium w-full flex-1 text-center' style={{ background: "linear-gradient(1deg, rgba(21, 128, 51, 1) 0%, rgba(34, 139, 34, 0.7) 100%)" }}>
-          <div className={`w-full p-10 ${activeItem === 'users' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('users')}>
+        <div className=' flex flex-col justify-evenly items-center text-lg text-white font-medium w-full flex-1 text-center' style={{ background: "linear-gradient(1deg, rgba(21, 128, 51, 1) 0%, rgba(34, 139, 34, 0.7) 100%)" }}>
+          <div className="text-[#481E14] font-bold text-lg items-start">
+            <span className='text-[24px]'>ADMIN</span>
+          </div>
+          <a href='/allusers' className={`flex w-full p-4 gap-2 ${activeItem === 'users' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('users')}>
+            <FaUserAlt className='pt-1 w-6 h-6'/>
             <p>USERS</p>
-          </div>
-          <div className={`w-full p-10 ${activeItem === 'nursery' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('nursery')}>
+          </a>
+          <a className={`flex gap-2 w-full p-4 ${activeItem === 'nursery' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('nursery')}>
+            <RiPlantFill className='inline w-7 h-7' />
             <p>NURSERY</p>
-          </div>
-          <div className={`w-full p-10 ${activeItem === 'beverages' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('beverages')}>
+          </a>
+          <a className={`flex gap-2 w-full p-4 ${activeItem === 'diy' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('diy')}>
+            <FaPaintBrush className='inline w-6 h-6'/>
+            <p>DIY</p>
+          </a>
+          <a className={`flex gap-2 w-full p-4 ${activeItem === 'beverages' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('beverages')}>
+            <RiDrinks2Fill className='inline w-6 h-6'/>
             <p>BEVERAGES</p>
-          </div>
-          <div className={`w-full p-10 ${activeItem === 'farmproduce' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('farmproduce')}>
+          </a>
+          <a className={`flex gap-2 w-full p-4  ${activeItem === 'farmproduce' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('farmproduce')}>
+            <GiFruitBowl className=' w-7 h-7'/>
             <p>FARM PRODUCE</p>
-          </div>
-          <div className={`w-full p-10 ${activeItem === 'statistics' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('statistics')}>
+          </a>
+          <a className={`flex gap-2 w-full p-4 ${activeItem === 'statistics' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('statistics')}>
+            <BsGraphUpArrow className='inline w-6 h-6'/>
             <p>STATISTICS</p>
-          </div>
+          </a>
 
         </div>
 
