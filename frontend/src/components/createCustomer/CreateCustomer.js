@@ -16,7 +16,10 @@ const CreateCustomer = () => {
         peopleCount: 0,
         activities: {
             movieCount: 0,
-            lunchCount: 0
+            lunchCount: 0,
+            diyCount:[],
+            beverages:[],
+            farmProduce:[]
         }
     });
 

@@ -1,5 +1,5 @@
 {
-    "port":5000,
-    "mongodbURI":"mongodb://localhost:27017/vrikshayan-billing",
-    "jwtSecret":"vrikshyan"
+    "port": 5000,
+    "mongodbURI": "mongodb+srv://root:root@vrikshyan.pmafidw.mongodb.net/?retryWrites=true&w=majority&appName=vrikshyan",
+    "jwtSecret": "vrikshyan"
 }

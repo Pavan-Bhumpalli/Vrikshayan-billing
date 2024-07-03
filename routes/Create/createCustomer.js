@@ -6,7 +6,10 @@ const StartFunc = async (req, res) => {
         obj.activities=
         {
             movieCount:0,
-            lunchCount:0
+            lunchCount:0,
+            diyCount:[],
+            beverages:[],
+            farmProduce:[]
         }
         let newCustomer = new customer(obj);
         await newCustomer.save();
