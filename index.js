@@ -28,6 +28,36 @@ app.use("/", nursery_crud);
 app.use("/", beverages_crud);
 app.use("/", farmproduce_crud);
 app.use("/", diy_crud);
+app.get("/customers/:month/:year", async (req, res) => {
+
+    try {
+        const month = parseInt(req.params.month);
+        const year = parseInt(req.params.year);
+        const customer = require('./schema/custModel'); 
+
+        const startDate = new Date(year, month - 1, 1); 
+        const endDate = new Date(year, month, 0, 23, 59, 59);
+
+        console.log("startDate", startDate);
+        console.log("endDate", endDate);
+
+        const foundCustomers = await customer.find({
+            createdAt: {
+                $gte: startDate,
+                $lte: endDate
+            }
+        });
+
+        if (foundCustomers.length === 0) {
+            return res.status(404).send("No customers found for the specified month and year");
+        }
+
+        res.status(200).json(foundCustomers);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server Error");
+    }
+});
 
 app.get("/", (req, res) => {
     res.send("Welcome to Vrikshyan");
