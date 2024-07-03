@@ -1,42 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaPaintBrush } from 'react-icons/fa';
 import { RiPlantFill } from 'react-icons/ri'; 
-import { RiDrinks2Fill } from "react-icons/ri";
+import { RiDrinks2Fill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 const MySwal = withReactContent(Swal);
 
-function ActivityInfo({ id, type }) {
+function ActivityInfo({ id, type, rowData }) {
   const [activityData, setActivityData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/getCustomer/${id}`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+  useEffect(() => {
+    const fetchData = () => {
+      try {
+        switch (type) {
+          case 'nursery':
+            setActivityData(rowData.activities.nurseryCount || []);
+            break;
+          case 'diy':
+            setActivityData(rowData.activities.diyCount || []);
+            break;
+          case 'beverages':
+            setActivityData(rowData.activities.beverages || []);
+            break;
+          default:
+            setActivityData([]);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
       }
-      const data = await response.json();
-      switch (type) {
-        case 'nursery':
-          setActivityData(data.activities.nurseryCount || []);
-          break;
-        case 'diy':
-          setActivityData(data.activities.diyCount || []);
-          break;
-        case 'beverages':
-          setActivityData(data.activities.beverages || []);
-          break;
-        default:
-          setActivityData([]);
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
+    };
+
+    fetchData();
+  }, [type, rowData]);
+
+  const showAlert = () => {
+    if (loading) {
+      return;
     }
-  };
-
-  const showAlert = async () => {
-    await fetchData();
+    
     MySwal.fire({
       title: 'Vrikshayan',
       html: (
@@ -55,7 +60,7 @@ function ActivityInfo({ id, type }) {
                 activityData.map((item, index) => (
                   <tr key={index} className="border-b">
                     <td className="px-4 py-2">{item.diy_pk || item.item_Pk}</td>
-                    <td className="px-4 py-2">{item.name || item.name}</td>
+                    <td className="px-4 py-2">{item.name}</td>
                     <td className="px-4 py-2">{item.cost || item.price}</td>
                     <td className="px-4 py-2">{item.count || item.quantity}</td>
                   </tr>
@@ -67,7 +72,6 @@ function ActivityInfo({ id, type }) {
                   </td>
                 </tr>
               )}
-
             </tbody>
           </table>
         </div>
@@ -81,7 +85,7 @@ function ActivityInfo({ id, type }) {
       {type === 'nursery' && <RiPlantFill className="cursor-pointer" onClick={showAlert} title="Click me" />}
       {type === 'diy' && <FaPaintBrush className="cursor-pointer" onClick={showAlert} title="Click me" />}
       {type === 'beverages' && <RiDrinks2Fill className="cursor-pointer" onClick={showAlert} title="Click me" />}
-    </div> 
+    </div>
   );
 }
 
