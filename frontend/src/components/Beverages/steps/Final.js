@@ -149,13 +149,20 @@ export default function FinalBeverages({ Customer_pk }) {
 
                             <label className="font-bold">Pk</label>
                             <input
-                                type="number"
+                                
+                                list="beverage-list"
                                 className="w-16 p-2 border rounded shadow appearance-none"
                                 autoFocus
                                 onChange={show}
                                 ref={pkRef}
-                                min={0}
+                                min={1}
                             />
+
+                            <datalist id="beverage-list">
+                                {nursery.map(item => (
+                                    <option key={item.beverageId} value={item.beverageId}>{item.beverageId}-{item.name}</option>
+                                ))}
+                            </datalist>
 
                             <label className="font-bold">Item Name</label>
                             <div className="p-2 border rounded shadow appearance-none w-60 h-11" id="name">{name}</div>
@@ -182,10 +189,10 @@ export default function FinalBeverages({ Customer_pk }) {
                     <DataTable columns={columns} data={data} />
                     <form onSubmit={UpdateItems}>
                         <div className="flex justify-between mt-4">
-                            <div className="bg-gray-200 p-3 rounded-lg font-semibold">
+                            <div className="p-3 font-semibold bg-gray-200 rounded-lg">
                                 Grand Total: {calculateGrandTotal()}
                             </div>
-                            <button className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold" type='submit'>Submit</button>             
+                            <button className="bg-[#3cbb25] text-white p-3 rounded-lg font-semibold" type='submit'>Submit</button>
                         </div>
                     </form>
                 </div>

@@ -27,7 +27,7 @@ export default function FinalNursery({ Customer_pk }) {
       selector: row => row.price * row.quantity,
     },
     {
-      name:"Delete",
+      name: "Delete",
       cell: (row) => <button onClick={async () => {
         try {
           Swal.fire({
@@ -40,8 +40,8 @@ export default function FinalNursery({ Customer_pk }) {
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
             if (result.isConfirmed) {
-              let val=[...data];
-              val=val.filter((item)=>item.item_Pk!==row.item_Pk);
+              let val = [...data];
+              val = val.filter((item) => item.item_Pk !== row.item_Pk);
               setData(val);
               Swal.fire({
                 title: "Deleted!",
@@ -55,7 +55,7 @@ export default function FinalNursery({ Customer_pk }) {
         } catch (err) {
           console.log(err);
         }
-        }}><MdOutlineDelete className='w-6 h-6 text-red-500'/></button>
+      }}><MdOutlineDelete className='w-6 h-6 text-red-500' /></button>
     }
   ];
 
@@ -86,7 +86,7 @@ export default function FinalNursery({ Customer_pk }) {
 
     const newItem = { item_Pk, name, quantity, price };
     const updatedData = [...data, newItem];
-    
+
     setData(updatedData);
     setGrandTotal(updatedData.reduce((acc, item) => acc + (item.price * item.quantity), 0));
 
@@ -130,17 +130,17 @@ export default function FinalNursery({ Customer_pk }) {
 
   const UpdateItems = async (e) => {
     e.preventDefault();
-    try{
+    try {
       const res = await axios.put(`http://localhost:5000/customer/nursery/${Customer_pk}`, data);
       Swal.fire({
         text: "Nursery Items Updated Successfully!",
         icon: "success"
       }).then(() => {
-        window.location.reload(); 
+        window.location.reload();
       }
       )
     }
-    catch(err){
+    catch (err) {
       console.log(err);
     }
   };
@@ -154,19 +154,25 @@ export default function FinalNursery({ Customer_pk }) {
 
               <label className="font-bold">Pk</label>
               <input
-                type="number"
+                list="nursey-list"
                 className="w-16 p-2 border rounded shadow appearance-none"
                 autoFocus
                 onChange={show}
                 ref={pkRef}
               />
 
+              <datalist id="nursey-list">
+                {nursery.map(item => (
+                  <option key={item.beverageId} value={item.nursery_pk}>{item.nursery_pk}-{item.name}</option>
+                ))}
+              </datalist>
+
               <label className="font-bold">Item Name</label>
               <div className="p-2 border rounded shadow appearance-none w-60 h-11" id="name">{name}</div>
 
               <label className="font-bold">Quantity</label>
               <input
-              id='quantityId'
+                id='quantityId'
                 type="number"
                 value={quantity}
                 className="w-16 p-2 border rounded shadow appearance-none"
@@ -185,7 +191,7 @@ export default function FinalNursery({ Customer_pk }) {
           </div>
           <DataTable columns={columns} data={data} />
           <div className="flex justify-between mt-4">
-            <div className="bg-gray-200 p-3 rounded-lg font-semibold">
+            <div className="p-3 font-semibold bg-gray-200 rounded-lg">
               Grand Total: {grandTotal}
             </div>
             <form onSubmit={UpdateItems}>
