@@ -11,6 +11,6 @@ const router = express.Router();
 router.post("/createNurseryItem", StartFuncCreateNursery);
 router.get("/getNurseryItems", StartFuncGetNurseryItems);
 router.get("/getNurseryItem/:pk", StartFuncGetNurseryItemByPk);
-router.delete("/NurseryItem/:id", StartFuncDeleteNurseryItem);
+router.delete("/NurseryItem/:pk", StartFuncDeleteNurseryItem);
 
 module.exports = router;

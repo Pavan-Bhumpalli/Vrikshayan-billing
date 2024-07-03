@@ -2,7 +2,7 @@ const item = require('../../schema/JS/diyModel');
 const StartFunc = async (req, res) => {
     try {
         const itemPk = req.params.pk;
-        const deletedItem = await item.findOneAndDelete({diy_pk:itemPk});
+        const deletedItem = await item.findOneAndDelete({item_pk:itemPk});
         //delete user using email
         // const userEmail = req.params.email;
         // const deletedUser = await user.findOneAndDelete({ email: userEmail });

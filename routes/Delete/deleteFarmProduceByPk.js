@@ -1,8 +1,8 @@
-const item = require('../../schema/JS/nurseryModel'); 
+const item = require('../../schema/JS/FarmProduceModal'); 
 const StartFunc = async (req, res) => {
     try {
         const itemPk = req.params.pk;
-        const deletedItem = await item.findOneAndDelete({nursery_pk:itemPk});
+        const deletedItem = await item.findOneAndDelete({produce_pk:itemPk});
         //delete user using email
         // const userEmail = req.params.email;
         // const deletedUser = await user.findOneAndDelete({ email: userEmail });

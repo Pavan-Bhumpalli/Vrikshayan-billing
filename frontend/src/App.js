@@ -36,10 +36,10 @@ function App() {
           <Route path='/diy' element={<Diy />} />
           <Route path='/adminDashboard' element={<AdminSidebar />} />
           <Route path='/allusers' element={<AllUsers />} /> 
-          <Route path='/nurseryAdmin' element={<AdminActivities type={"getNurseryItems"} inp={"createNurseryItem"}/>}/>
-          <Route path='/diyAdmin' element={<AdminActivities type={"getDIYItems"} inp={"createDIYItem"}/>}/>
-          <Route path='/bevaragesAdmin' element={<AdminActivities type={"getBeverages"}  inp={"createBeverages"}/>}/>
-          <Route path='/farmProduceAdmin' element={<AdminActivities type={"getFarmProduces"} inp={"createFarmProduce"}/>}/>
+          <Route path='/nurseryAdmin' element={<AdminActivities type={"getNurseryItems"} inp={"createNurseryItem"} del={"NurseryItem"}/>}/>
+          <Route path='/diyAdmin' element={<AdminActivities type={"getDIYItems"} inp={"createDIYItem"} del={"diyItem"}/>}/>
+          <Route path='/bevaragesAdmin' element={<AdminActivities type={"getBeverages"}  inp={"createBeverages"} del={"beverage"}/>}/>
+          <Route path='/farmProduceAdmin' element={<AdminActivities type={"getFarmProduces"} inp={"createFarmProduce"} del={"farmProduce"}/>}/>
         </Routes>
       </BrowserRouter>
     </div>
