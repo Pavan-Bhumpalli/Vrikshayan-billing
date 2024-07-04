@@ -38,8 +38,6 @@ app.get("/customers/:month/:year", async (req, res) => {
         const startDate = new Date(year, month - 1, 1); 
         const endDate = new Date(year, month, 0, 23, 59, 59);
 
-        console.log("startDate", startDate);
-        console.log("endDate", endDate);
 
         const foundCustomers = await customer.find({
             createdAt: {

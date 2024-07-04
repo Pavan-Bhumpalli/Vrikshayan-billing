@@ -35,6 +35,7 @@ function App() {
           <Route path='/billing' element={<Billing />} />
           <Route path='/diy' element={<Diy />} />
           <Route path='/adminDashboard' element={<AdminSidebar />} />
+          <Route path='/statistics' element={<Statistics />} />
           <Route path='/allusers' element={<AllUsers />} /> 
           <Route path='/nurseryAdmin' element={<AdminActivities type={"getNurseryItems"} inp={"createNurseryItem"} del={"NurseryItem"}/>}/>
           <Route path='/diyAdmin' element={<AdminActivities type={"getDIYItems"} inp={"createDIYItem"} del={"diyItem"}/>}/>
