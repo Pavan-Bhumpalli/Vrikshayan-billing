@@ -15,6 +15,7 @@ import AdminSidebar from './components/Admin/AdminSidebar';
 import Statistics from './components/Admin/Statistics';
 import AllUsers from './components/Admin/AllUsers';
 import AdminActivities from './components/Admin/AdminActivities';
+import Bill from './components/Bill/Bill'
 
 
 function App() {
@@ -33,14 +34,15 @@ function App() {
           <Route path='/nursery' element={<Nursery />} />
           <Route path='/beverages' element={<Bevarages />} />
           <Route path='/billing' element={<Billing />} />
+          <Route path='/bill' element={<Bill />} />
           <Route path='/diy' element={<Diy />} />
           <Route path='/adminDashboard' element={<AdminSidebar />} />
           <Route path='/statistics' element={<Statistics />} />
-          <Route path='/allusers' element={<AllUsers />} /> 
-          <Route path='/nurseryAdmin' element={<AdminActivities type={"getNurseryItems"} inp={"createNurseryItem"} del={"NurseryItem"} update={"nursery"}/>}/>
-          <Route path='/diyAdmin' element={<AdminActivities type={"getDIYItems"} inp={"createDIYItem"} del={"diyItem"} update={"diy"}/>}/>
-          <Route path='/bevaragesAdmin' element={<AdminActivities type={"getBeverages"}  inp={"createBeverages"} del={"beverage"} update={"beverage"}/>}/>
-          <Route path='/farmProduceAdmin' element={<AdminActivities type={"getFarmProduces"} inp={"createFarmProduce"} del={"farmProduce"} update={"farmProduce"}/>}/>
+          <Route path='/allusers' element={<AllUsers />} />
+          <Route path='/nurseryAdmin' element={<AdminActivities type={"getNurseryItems"} inp={"createNurseryItem"} del={"NurseryItem"} update={"nursery"} />} />
+          <Route path='/diyAdmin' element={<AdminActivities type={"getDIYItems"} inp={"createDIYItem"} del={"diyItem"} update={"diy"} />} />
+          <Route path='/bevaragesAdmin' element={<AdminActivities type={"getBeverages"} inp={"createBeverages"} del={"beverage"} update={"beverage"} />} />
+          <Route path='/farmProduceAdmin' element={<AdminActivities type={"getFarmProduces"} inp={"createFarmProduce"} del={"farmProduce"} update={"farmProduce"} />} />
         </Routes>
       </BrowserRouter>
     </div>
