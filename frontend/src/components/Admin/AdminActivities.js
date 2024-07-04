@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AdminSidebar from './AdminSidebar';
 import axios from 'axios';
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdSave, MdCancel } from "react-icons/md";
 import swal from 'sweetalert2';
 import { MdDeleteOutline } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
-const AdminActivities = ({ type, inp, del }) => {
+const AdminActivities = ({ type, inp, del, update }) => {
     const [data, setData] = useState([]);
+    const [editItemId, setEditItemId] = useState(null);
+    const [editFormData, setEditFormData] = useState({});
+    const nameInputRef = useRef(null);
 
     const loadUsers = async () => {
         const response = await axios.get(`http://localhost:5000/${type}`);
@@ -17,13 +21,19 @@ const AdminActivities = ({ type, inp, del }) => {
         loadUsers();
     }, [type]);
 
+    useEffect(() => {
+        if (editItemId && nameInputRef.current) {
+            nameInputRef.current.focus();
+        }
+    }, [editItemId]);
+
     const addNewItem = async () => {
         const { value: formValues } = await swal.fire({
             title: 'Add New Item',
             html: `
-        <input type='text' id='name' class='swal2-input' placeholder='Name'>
-        <input type='number' id='cost' class='swal2-input' placeholder='Cost'>
-      `,
+                <input type='text' id='name' class='swal2-input' placeholder='Name'>
+                <input type='number' id='cost' class='swal2-input' placeholder='Cost'>
+            `,
             focusConfirm: false,
             showCancelButton: true,
             confirmButtonText: 'Add Item',
@@ -68,8 +78,40 @@ const AdminActivities = ({ type, inp, del }) => {
         }
     };
 
+    const handleEditClick = (item) => {
+        setEditItemId(item._id);
+        setEditFormData({ name: item.name, cost: item.cost || item.price });
+    };
+
+    const handleCancelClick = () => {
+        setEditItemId(null);
+        setEditFormData({});
+    };
+
+    const handleFormChange = (event) => {
+        const { name, value } = event.target;
+        setEditFormData({ ...editFormData, [name]: value });
+    };
+
+    const handleSaveClick = async (item_pk) => {
+        try {
+            const response = await axios.put(`http://localhost:5000/${update}/${item_pk}`, editFormData);
+            if (response.status === 200) {
+                const updatedData = data.map(item =>
+                    (item.nursery_pk || item.item_pk || item.beverageId || item.produce_pk || item.diy_pk) === item_pk ? { ...item, ...editFormData } : item
+                );
+                setData(updatedData);
+                setEditItemId(null);
+                setEditFormData({});
+                swal.fire('Saved!', 'Your item has been updated.', 'success');
+            }
+        } catch (error) {
+            swal.fire('Error', 'There was a problem saving your item.', 'error');
+        }
+    };
+
     return (
-        <div className='flex '>
+        <div className='flex'>
             <AdminSidebar />
             <div className='flex flex-col w-full p-8'>
                 <div className='flex justify-end mb-4'>
@@ -85,21 +127,52 @@ const AdminActivities = ({ type, inp, del }) => {
                                 <th className='py-2 px-4 border'>Pk</th>
                                 <th className='py-2 px-4 border'>Name</th>
                                 <th className='py-2 px-4 border'>Cost</th>
-                                <th className='py-2 px-4 border'>Edit</th>
-                                <th className='py-2 px-4 border'>Delete</th>
+                                <th className='py-2 px-4 border'>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {data.map((item) => (
                                 <tr key={item._id} className='text-center border-t'>
                                     <td className='py-2 px-4 border'>{item.nursery_pk || item.item_pk || item.beverageId || item.produce_pk || item.diy_pk}</td>
-                                    <td className='py-2 px-4 border'>{item.name}</td>
-                                    <td className='py-2 px-4 border'>{item.cost || item.price}</td>
                                     <td className='py-2 px-4 border'>
-                                        <button className='text-blue-500 hover:underline'>Edit</button>
+                                        {editItemId === item._id ? (
+                                            <input
+                                                type='text'
+                                                name='name'
+                                                value={editFormData.name}
+                                                onChange={handleFormChange}
+                                                className='border rounded p-1'
+                                                ref={nameInputRef}
+                                            />
+                                        ) : (
+                                            item.name
+                                        )}
                                     </td>
                                     <td className='py-2 px-4 border'>
-                                        <button onClick={() => deleteItem(item.nursery_pk || item.item_pk || item.beverageId || item.produce_pk || item.diy_pk)} className='text-red-500 hover:underline'><MdDeleteOutline size={25} /></button>
+                                        {editItemId === item._id ? (
+                                            <input
+                                                type='number'
+                                                name='cost'
+                                                value={editFormData.cost}
+                                                onChange={handleFormChange}
+                                                className='border rounded p-1'
+                                            />
+                                        ) : (
+                                            item.cost || item.price
+                                        )}
+                                    </td>
+                                    <td className='py-2 px-4 border'>
+                                        {editItemId === item._id ? (
+                                            <>
+                                                <button onClick={() => handleSaveClick(item.nursery_pk || item.item_pk || item.beverageId || item.produce_pk || item.diy_pk)} className='text-green-500 hover:underline'><MdSave size={25} /></button>
+                                                <button onClick={handleCancelClick} className='text-red-500 hover:underline ml-2'><MdCancel size={25} /></button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button onClick={() => handleEditClick(item)} className='text-blue-500 hover:underline'><FaEdit size={23} /></button>
+                                                <button onClick={() => deleteItem(item.nursery_pk || item.item_pk || item.beverageId || item.produce_pk || item.diy_pk)} className='text-red-500 hover:underline ml-2'><MdDeleteOutline size={25} /></button>
+                                            </>
+                                        )}
                                     </td>
                                 </tr>
                             ))}

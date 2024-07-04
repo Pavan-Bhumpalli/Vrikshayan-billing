@@ -37,10 +37,10 @@ function App() {
           <Route path='/adminDashboard' element={<AdminSidebar />} />
           <Route path='/statistics' element={<Statistics />} />
           <Route path='/allusers' element={<AllUsers />} /> 
-          <Route path='/nurseryAdmin' element={<AdminActivities type={"getNurseryItems"} inp={"createNurseryItem"} del={"NurseryItem"}/>}/>
-          <Route path='/diyAdmin' element={<AdminActivities type={"getDIYItems"} inp={"createDIYItem"} del={"diyItem"}/>}/>
-          <Route path='/bevaragesAdmin' element={<AdminActivities type={"getBeverages"}  inp={"createBeverages"} del={"beverage"}/>}/>
-          <Route path='/farmProduceAdmin' element={<AdminActivities type={"getFarmProduces"} inp={"createFarmProduce"} del={"farmProduce"}/>}/>
+          <Route path='/nurseryAdmin' element={<AdminActivities type={"getNurseryItems"} inp={"createNurseryItem"} del={"NurseryItem"} update={"nursery"}/>}/>
+          <Route path='/diyAdmin' element={<AdminActivities type={"getDIYItems"} inp={"createDIYItem"} del={"diyItem"} update={"diy"}/>}/>
+          <Route path='/bevaragesAdmin' element={<AdminActivities type={"getBeverages"}  inp={"createBeverages"} del={"beverage"} update={"beverage"}/>}/>
+          <Route path='/farmProduceAdmin' element={<AdminActivities type={"getFarmProduces"} inp={"createFarmProduce"} del={"farmProduce"} update={"farmProduce"}/>}/>
         </Routes>
       </BrowserRouter>
     </div>
