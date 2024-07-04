@@ -35,7 +35,7 @@ const AdminSidebar = () => {
 
   
   return (
-    <div className='flex flex-col items-center  w-[18rem] min-h-screen '>
+    <div className='flex flex-col items-center  w-[20%] min-h-screen fixed'>
         <div className='w-full h-[100px]'> 
             <img src={logo} alt='logo' className='w-full h-full'/>
         </div>

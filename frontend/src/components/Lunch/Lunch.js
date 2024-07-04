@@ -54,7 +54,7 @@ const Lunch = () => {
 
     <div className="flex items-center h-screen">
       <Sidebar />
-      <div className="w-[70%] mx-auto">
+      <div className="w-[70%] mx-auto ml-[25%]">
         <div className="pb-2 bg-white shadow-xl rounded-2xl">
           <div className="container flex flex-col items-center justify-center flex-1 p-4 mt-5 horizontal">
             <div className={`mb-11 rounded-full h-12 w-12 flex flex-col items-center justify-center bg-green-600 text-white font-bold  border-green-600"}`}>

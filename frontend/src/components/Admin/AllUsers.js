@@ -1,22 +1,23 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminSidebar from './AdminSidebar';
 import axios from 'axios';
-import {MdAdd} from "react-icons/md";
-import {FaEye} from "react-icons/fa6";
+import { MdAdd } from "react-icons/md";
+import { FaEye } from "react-icons/fa6";
 import swal from 'sweetalert2';
-import {MdDelete} from "react-icons/md";
-import {FaRegEdit} from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
 
 const AllUsers = () => {
-  const [data, setdata] = useState([]);
+  const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const loadUsers = async () => {
       const response = await axios.get('http://localhost:5000/users');
-      setdata(response.data);
+      setData(response.data);
     }
     loadUsers();
-  }, [])
+  }, []);
 
   const ShowPassword = (password) => {
     swal.fire({
@@ -139,7 +140,6 @@ const AllUsers = () => {
       }
     });
   }
-  
 
   const deleteUser = async (id) => {
     const result = await swal.fire({
@@ -166,7 +166,7 @@ const AllUsers = () => {
             text: 'User has been deleted.',
             icon: 'success'
           });
-          setdata(data.filter(user => user._id !== id));
+          setData(data.filter(user => user._id !== id));
         }
       } catch (err) {
         swal.fire({
@@ -178,15 +178,28 @@ const AllUsers = () => {
     }
   }
 
+  const filteredData = data.filter(user => 
+    user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className='flex '>
+    <div className='flex'>
       <AdminSidebar />
-      <div className='flex flex-col w-full p-8'>
-        <div className='flex justify-end mb-4'>
+      <div className='flex flex-col p-8 ml-[20%] w-[80%]'>
+        <div className='flex  justify-end mb-4 gap-3'>
+        <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="px-4 py-2 border rounded w-72"
+          />
           <button onClick={AddNewUser} className='flex items-center font-semibold bg-[#228b22] text-white px-4 py-2 rounded hover:bg-[#165816]'>
             <MdAdd className='inline w-6 h-6 mr-2' />
             <span>Create User</span>
           </button>
+          
         </div>
         <div className='overflow-x-auto'>
           <table className='min-w-full bg-white shadow-md rounded'>
@@ -200,7 +213,7 @@ const AllUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((user) => (
+              {filteredData.map((user) => (
                 <tr key={user._id} className='text-center border-t'>
                   <td className='py-2 px-4 border'>{user.name}</td>
                   <td className='py-2 px-4 border'>{user.email}</td>
