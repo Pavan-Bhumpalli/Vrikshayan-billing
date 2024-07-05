@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router-dom';
 import topImage from './Images/top.png';
 
 const Bill = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { Customer_id } = location.state || {};
   const [data, setData] = useState({});
   const [sno, setSno] = useState(1); // State for sequential numbering
   const [isLoading, setIsLoading] = useState(true);
@@ -9,8 +14,12 @@ const Bill = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/getCustomer/17');
+        const response = await fetch(`http://localhost:5000/getCustomer/${Customer_id}`);
         if (!response.ok) {
+          Swal.fire({
+            text: `Customer not found`,
+            icon: "error",
+          })
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
@@ -34,6 +43,8 @@ const Bill = () => {
     window.print();
 
     document.body.innerHTML = originalContents;
+    navigate('/billing');
+
     window.location.reload(); // Reload the page to restore the original content
   };
 
@@ -42,7 +53,7 @@ const Bill = () => {
   }
 
   return (
-    <div className='flex flex-col justify-center h-screen bg-slate-50'>
+    <div className='flex flex-col h-screen bg-slate-50'>
       <div
         id="printableArea"
         style={{

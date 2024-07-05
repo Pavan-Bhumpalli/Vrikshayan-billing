@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { MdOutlineDelete } from 'react-icons/md';
 
 export default function FinalBilling({ Customer_pk }) {
+  const navigate = useNavigate();
   const columns = [
     {
       name: 'Pk',
@@ -57,7 +59,7 @@ export default function FinalBilling({ Customer_pk }) {
             }
           }}
         >
-          <MdOutlineDelete className="w-6 text-red-500 h-6" />
+          <MdOutlineDelete className="w-6 h-6 text-red-500" />
         </button>
       ),
     },
@@ -138,7 +140,7 @@ export default function FinalBilling({ Customer_pk }) {
         text: 'Nursery Items Updated Successfully!',
         icon: 'success',
       }).then(() => {
-        window.location.reload();
+        navigate('/bill', { state: { Customer_id: Customer_pk } });
       });
     } catch (err) {
       console.log(err);
@@ -157,15 +159,23 @@ export default function FinalBilling({ Customer_pk }) {
             <form className="flex items-center justify-between" onSubmit={submitHandler}>
               <label className="font-bold">Pk</label>
               <input
-                type="number"
                 className="w-16 p-2 border rounded shadow appearance-none"
                 autoFocus
                 onChange={show}
                 ref={pkRef}
+                min={1}
+                list="item-list"
+                required
               />
 
+              <datalist id="item-list">
+                {billing.map(item => (
+                  <option key={item.produce_pk} value={item.produce_pk}>{item.produce_pk}-{item.name}</option>
+                ))}
+              </datalist>
+
               <label className="font-bold">Item Name</label>
-              <div className="p-2 border w-60 h-11 rounded shadow appearance-none" id="name">
+              <div className="p-2 border rounded shadow appearance-none w-60 h-11" id="name">
                 {name}
               </div>
 
@@ -181,7 +191,7 @@ export default function FinalBilling({ Customer_pk }) {
               />
 
               <label className="font-bold">Price</label>
-              <div className="p-2 border w-16 h-11 rounded shadow appearance-none" id="price">
+              <div className="w-16 p-2 border rounded shadow appearance-none h-11" id="price">
                 {price}
               </div>
 
@@ -193,7 +203,7 @@ export default function FinalBilling({ Customer_pk }) {
           </div>
           <DataTable columns={columns} data={data} />
           <div className="flex justify-between mt-4">
-            <div className="bg-gray-200 p-3 rounded-lg font-semibold">
+            <div className="p-3 font-semibold bg-gray-200 rounded-lg">
               Grand Total: {calculateGrandTotal()}
             </div>
             <form onSubmit={UpdateItems}>

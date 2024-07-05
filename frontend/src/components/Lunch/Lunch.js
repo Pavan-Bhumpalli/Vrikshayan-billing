@@ -18,6 +18,10 @@ const Lunch = () => {
     try {
       const response = await fetch(`http://localhost:5000/getCustomer/${inputValue}`);
       if (!response.ok) {
+        Swal.fire({
+          text: `Customer ${response.statusText}`,
+          icon: "error",
+        })
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
@@ -58,7 +62,7 @@ const Lunch = () => {
         <div className="pb-2 bg-white shadow-xl rounded-2xl">
           <div className="container flex flex-col items-center justify-center flex-1 p-4 mt-5 horizontal">
             <div className={`mb-11 rounded-full h-12 w-12 flex flex-col items-center justify-center bg-green-600 text-white font-bold  border-green-600"}`}>
-              <span className="text-xl font-bold text-white"><PiBowlFoodBold className='w-7 h-7'/></span>
+              <span className="text-xl font-bold text-white"><PiBowlFoodBold className='w-7 h-7' /></span>
               <div className='absolute w-32 mt-16 text-xl font-bold text-center text-[#2e7120] uppercase'>Lunch</div>
             </div>
             <form onSubmit={handleSubmit} className="flex items-center justify-center flex-1 ">
