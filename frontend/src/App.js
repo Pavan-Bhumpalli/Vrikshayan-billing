@@ -14,7 +14,8 @@ import AdminSidebar from './components/Admin/AdminSidebar';
 import Statistics from './components/Admin/Statistics';
 import AllUsers from './components/Admin/AllUsers';
 import AdminActivities from './components/Admin/AdminActivities';
-import Bill from './components/Bill/Bill'
+import Bill from './components/Bill/Bill';
+import LoginError from './components/LoginError';
 
 
 function App() {
