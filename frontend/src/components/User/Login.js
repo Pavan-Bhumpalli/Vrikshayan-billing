@@ -94,9 +94,6 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <div>
-          Create new Account: <NavLink to="/Register" className="text-white hover:text-blue-700 cursor-pointer text-lg font-semibold">Register</NavLink>
-        </div>
       </div>
     </div>
   );

@@ -8,7 +8,14 @@ import ActivityInfo from './ActivityInfo';
 const Details = () => {
   const [products, setProducts] = useState([]);
 
+  let token=null;
+
   useEffect(() => {
+    token=localStorage.getItem('token');
+    if(!token)
+    {
+      window.location.href="/loginerror";
+    }
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:5000/getCustomers');
@@ -27,9 +34,9 @@ const Details = () => {
   }, []);
 
   return (
-    <div className="relative flex overflow-x-auto shadow-md sm:rounded-lg ">
+    <div className="flex h-screen  ">
       <Sidebar />
-      <div className="flex-1 p-5 justify-center items-center flex ml-[18%]">
+      <div className=" flex-1 p-5 justify-center items-center flex ml-[18%] ">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -82,9 +89,6 @@ const Details = () => {
                     Qr
                   </div>
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  <span className="sr-only">Edit</span>
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -103,13 +107,8 @@ const Details = () => {
                   <td className="px-6 py-4"><ActivityInfo id={product.pk} type={"diy"} rowData={product}/></td>
                   <td className="px-6 py-4"><ActivityInfo id={product.pk} type={"beverages"} rowData={product}/></td>
                   <td className="px-6 py-4">{product.createdAt.substring(0, 10)}</td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 cursor-pointer">
                     <QrCodeGeneration id={product.pk} name={product.name} bgImage={bgImage} topImage={topImage}/>
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                      Edit
-                    </a>
                   </td>
                 </tr>
               ))}
