@@ -149,7 +149,7 @@ export default function FinalBeverages({ Customer_pk }) {
 
                             <label className="font-bold">Pk</label>
                             <input
-                                
+
                                 list="beverage-list"
                                 className="w-16 p-2 border rounded shadow appearance-none"
                                 autoFocus
@@ -174,7 +174,7 @@ export default function FinalBeverages({ Customer_pk }) {
                                 value={quantity}
                                 className="w-16 p-2 border rounded shadow appearance-none"
                                 onChange={addTotal}
-                                min={0}
+                                min={1}
                             />
 
                             <label className="font-bold">Price</label>
