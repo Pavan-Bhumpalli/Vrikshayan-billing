@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { PiBowlFoodBold } from 'react-icons/pi';
+import Logout from '../Logout';
 
 const Lunch = () => {
   const [inputValue, setInputValue] = useState('');
@@ -12,6 +13,16 @@ const Lunch = () => {
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
+
+  let token=null;
+    useEffect(() => {
+        token=localStorage.getItem('token');
+        if(!token)
+        {
+            window.location.href="/loginerror";
+        }
+
+    },[]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -122,6 +133,7 @@ const Lunch = () => {
           </div>
         </div>
       </div>
+      <Logout />
     </div>
   );
 };

@@ -14,7 +14,8 @@ const StartFunc = async (req, res) => {
         }
         let payload = {
             user: {
-                id: exist.id
+                id: exist.id,
+                email: exist.email
             }
         }
         jwt.sign(payload, configJSON.jwtSecret, { expiresIn: 3600000 }, (err, token) => {

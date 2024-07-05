@@ -4,6 +4,7 @@ import QrCodeGeneration from './QrCodeGeneration';
 import bgImage from './Images/background_id.png';
 import topImage from './Images/top.png'; 
 import ActivityInfo from './ActivityInfo';
+import Logout from '../Logout';
 
 const Details = () => {
   const [products, setProducts] = useState([]);
@@ -116,6 +117,7 @@ const Details = () => {
           </table>
         </div>
       </div>
+      <Logout />
     </div>
   );
 };

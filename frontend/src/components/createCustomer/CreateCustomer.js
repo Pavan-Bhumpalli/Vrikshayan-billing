@@ -6,6 +6,7 @@ import withReactContent from 'sweetalert2-react-content';
 import QRCode from 'react-qr-code';
 import bgImage from './Images/background_id.png';
 import topImage from './Images/top.png';
+import Logout from '../Logout';
 
 const MySwal = withReactContent(Swal);
 
@@ -152,6 +153,7 @@ const CreateCustomer = () => {
                     </form>
                 </div>
             </div>
+            <Logout />
         </div>
     );
 };

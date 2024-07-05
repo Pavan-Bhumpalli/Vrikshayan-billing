@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
+import Logout from './Logout';
 import { PieChart, Pie, Tooltip, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LineChart, Line } from 'recharts';
 
 const Statistics = () => {
@@ -19,6 +20,17 @@ const Statistics = () => {
   ];
 
   const years = Array.from({ length: 7 }, (v, i) => 2024 + i);
+
+  let token=null;
+  useEffect(() => {
+    const validate = () => {
+        token = localStorage.getItem('token');
+        if(token==null){
+          window.location.href='/loginerror'
+        }
+    };
+    validate();
+  },[]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,7 +86,7 @@ const Statistics = () => {
   return (
     <div className='flex'>
       <AdminSidebar />
-      <div className='flex w-[80%] flex-col items-center justify-center'>
+      <div className='flex w-[80%] flex-col items-center justify-center ml-[20%] '>
         <div className='flex w-[50%] my-4 flex-col items-center justify-center rounded-[20px]' style={{boxShadow : '2px 4px 6px rgba(0, 0, 0, 0.6)'}}>
           <div className='flex flex-col gap-8'>
             <h1 className='text-3xl font-bold pt-4 text-center'>Customer Count</h1>
@@ -171,6 +183,7 @@ const Statistics = () => {
           )}
         </div>
       </div>
+      <Logout />
     </div>
   );
 };

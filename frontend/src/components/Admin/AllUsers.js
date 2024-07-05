@@ -6,14 +6,21 @@ import { FaEye } from "react-icons/fa6";
 import swal from 'sweetalert2';
 import { MdDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import Logout from './Logout';
 
 const AllUsers = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  let token = null;
 
   useEffect(() => {
     const loadUsers = async () => {
       try {
+        token=localStorage.getItem('token');
+        if(!token)
+        {
+          window.location.href="/loginerror";
+        }
         const response = await axios.get('http://localhost:5000/users');
         setData(response.data);
       } catch (error) {
@@ -253,14 +260,15 @@ const AllUsers = () => {
   }
 
   const filteredData = data.filter(user => 
-    user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchQuery.toLowerCase())
+    (user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchQuery.toLowerCase())) &&
+    user.name!=="admin"
   );
 
   return (
     <div className='flex h-screen'>
       <AdminSidebar />
-      <div className='flex flex-col p-8 ml-[20%] w-[80%]'>
+      <div className='flex flex-col p-8 ml-[20%] w-[80%] mt-[2%]'>
         <div className='flex justify-end mb-4 gap-3'>
           <input
             type="text"
@@ -311,6 +319,7 @@ const AllUsers = () => {
           </table>
         </div>
       </div>
+      <Logout />
     </div>
   )
 }

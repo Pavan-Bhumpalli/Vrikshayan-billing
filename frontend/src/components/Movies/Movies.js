@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Logout from '../Logout';
 import { RiMovie2Fill } from 'react-icons/ri';
 
 const Movie = () => {
   const [inputValue, setInputValue] = useState('');
   const [movieCount, setMovieCount] = useState('');
   const [customerData, setCustomerData] = useState(null);
+
+  let token=null;
+    useEffect(() => {
+        token=localStorage.getItem('token');
+        if(!token)
+        {
+          window.location.href="/loginerror";
+        }
+
+    },[]);
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
@@ -119,6 +130,7 @@ const Movie = () => {
           </div>
         </div>
       </div>
+      <Logout />
     </div>
   );
 };

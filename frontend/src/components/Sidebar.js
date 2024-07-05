@@ -12,6 +12,16 @@ const Sidebar = () => {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState('');
 
+  let token=null;
+  useEffect(() => {
+    token=localStorage.getItem('token');
+    if(!token)
+    {
+      window.location.href="/loginerror";
+    }
+
+  },[]);
+
   useEffect(() => {
     const path = location.pathname;
     if (path === '/createCustomer') {
@@ -38,6 +48,8 @@ const Sidebar = () => {
   const handleItemClick = (item) => {
     setActiveItem(item);
   };
+
+  
 
   return (
     <div className="fixed flex flex-col flex-shrink-0 min-h-screen w-[18%] text-white shadow-lg">
@@ -138,8 +150,10 @@ const Sidebar = () => {
               <span className="">Final Billing</span>
             </a>
           </li>
+          
         </ul>
       </nav>
+      
     </div>
   );
 };

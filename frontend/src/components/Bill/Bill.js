@@ -10,10 +10,16 @@ const Bill = () => {
   const [data, setData] = useState({});
   const [sno, setSno] = useState(1); // State for sequential numbering
   const [isLoading, setIsLoading] = useState(true);
+  let token=null;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        token=localStorage.getItem('token');
+        if(!token)
+        {
+            window.location.href="/loginerror";
+        }
         const response = await fetch(`http://localhost:5000/getCustomer/${Customer_id}`);
         if (!response.ok) {
           Swal.fire({

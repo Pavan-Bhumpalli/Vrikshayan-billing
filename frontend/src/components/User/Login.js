@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import image from './Images/logo.png';
-import { NavLink, Navigate } from 'react-router-dom';
+import {  Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Login = () => {
@@ -50,6 +50,10 @@ const Login = () => {
   };
 
   if (redirect) {
+    if(data.email==="admin@gmail.com" && data.password==="admin" )
+    {
+      return <Navigate to="/allusers" />;
+    }
     return <Navigate to="/createCustomer" />;
   }
 
@@ -69,6 +73,7 @@ const Login = () => {
               id="email"
               type="text"
               value={data.email}
+              autoComplete='off'
               onChange={(e) => setData({ ...data, email: e.target.value })}
             />
             {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}

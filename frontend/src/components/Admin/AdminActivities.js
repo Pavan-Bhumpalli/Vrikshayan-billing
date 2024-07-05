@@ -5,12 +5,22 @@ import { MdAdd, MdSave, MdCancel } from "react-icons/md";
 import swal from 'sweetalert2';
 import { MdDeleteOutline } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import Logout from './Logout';
 
 const AdminActivities = ({ type, inp, del, update }) => {
     const [data, setData] = useState([]);
     const [editItemId, setEditItemId] = useState(null);
     const [editFormData, setEditFormData] = useState({});
     const nameInputRef = useRef(null);
+    let token=null;
+    useEffect(() => {
+        token=localStorage.getItem('token');
+        if(!token)
+        {
+          window.location.href="/loginerror";
+        }
+
+    },[]);
 
     const loadUsers = async () => {
         const response = await axios.get(`http://localhost:5000/${type}`);
@@ -121,9 +131,9 @@ const AdminActivities = ({ type, inp, del, update }) => {
     };
 
     return (
-        <div className='flex'>
+        <div className='flex h-screen'>
             <AdminSidebar />
-            <div className='flex flex-col w-full p-8'>
+            <div className='flex flex-col w-full p-8 ml-[20%] mt-[2%]'>
                 <div className='flex justify-end mb-4'>
                     <button onClick={addNewItem} className='flex items-center font-semibold bg-[#228b22] text-white px-4 py-2 rounded hover:bg-[#165816]'>
                         <MdAdd className='inline w-6 h-6 mr-2' />
@@ -190,6 +200,7 @@ const AdminActivities = ({ type, inp, del, update }) => {
                     </table>
                 </div>
             </div>
+            <Logout />
         </div>
     );
 };
