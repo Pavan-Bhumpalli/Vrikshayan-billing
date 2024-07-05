@@ -28,9 +28,9 @@ const Billing = () => {
             case 1:
                 return <Account setPk={setPk} next={handleNext} />;
             case 2:
-                return <Details pk={pk} next={handleNext}/>;
+                return <Details pk={pk} next={handleNext} prev={handleClick} />;
             case 3:
-                return <FinalBilling Customer_pk={pk}/>;
+                return <FinalBilling Customer_pk={pk} />;
             default:
                 return null;
         }

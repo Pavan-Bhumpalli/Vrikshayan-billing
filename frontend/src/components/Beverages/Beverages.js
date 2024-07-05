@@ -28,7 +28,7 @@ const Bevarages = () => {
             case 1:
                 return <Account setPk={setPk} next={handleNext} />;
             case 2:
-                return <Details pk={pk} next={handleNext}/>;
+                return <Details pk={pk} next={handleNext} prev={handleClick} />;
             case 3:
                 return <FinalBeverages Customer_pk={pk} />;
             default:
@@ -48,8 +48,8 @@ const Bevarages = () => {
         <div className="flex items-center h-screen ">
             <Sidebar />
             <div className="w-[70%] mx-auto ml-[25%]">
-            <div className="flex flex-col items-center justify-center pb-2 bg-white shadow-xl rounded-2xl">
-                <div className={`mt-8 mb-8 rounded-full h-12 w-12 flex flex-col items-center justify-center bg-green-600 text-white font-bold  border-green-600"}`}>
+                <div className="flex flex-col items-center justify-center pb-2 bg-white shadow-xl rounded-2xl">
+                    <div className={`mt-8 mb-8 rounded-full h-12 w-12 flex flex-col items-center justify-center bg-green-600 text-white font-bold  border-green-600"}`}>
                         <span className="text-xl font-bold text-white"><RiDrinks2Fill className='w-7 h-7' /></span>
                         <div className='absolute w-32 mt-16 text-xl font-bold text-center text-[#2e7120] uppercase'>Beverages</div>
                     </div>

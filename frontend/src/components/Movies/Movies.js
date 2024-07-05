@@ -18,7 +18,10 @@ const Movie = () => {
     try {
       const response = await fetch(`http://localhost:5000/getCustomer/${inputValue}`);
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        Swal.fire({
+          text: `Customer ${response.statusText}`,
+          icon: "error",
+        })
       }
       const data = await response.json();
       setCustomerData(data);
@@ -40,7 +43,7 @@ const Movie = () => {
         text: "Movies Count Updated Successfully!",
         icon: "success"
       }).then(() => {
-        window.location.reload(); 
+        window.location.reload();
       }
       )
       // console.log(response.data);
@@ -56,7 +59,7 @@ const Movie = () => {
         <div className="pb-2 bg-white shadow-xl rounded-2xl">
           <div className="container flex flex-col items-center justify-center flex-1 p-4 mt-5 horizontal">
             <div className={`mb-11 rounded-full h-12 w-12 flex flex-col items-center justify-center bg-green-600 text-white font-bold  border-green-600"}`}>
-              <span className="text-xl font-bold text-white"><RiMovie2Fill className='w-7 h-7'/></span>
+              <span className="text-xl font-bold text-white"><RiMovie2Fill className='w-7 h-7' /></span>
               <div className='absolute w-32 mt-16 text-xl font-bold text-center text-[#2e7120] uppercase'>Movies</div>
             </div>
             <form onSubmit={handleSubmit} className="flex items-center justify-center flex-1 ">

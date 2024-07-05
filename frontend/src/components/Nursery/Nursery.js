@@ -27,7 +27,7 @@ const Nursery = () => {
             case 1:
                 return <Account setPk={setPk} next={handleNext} />;
             case 2:
-                return <Details pk={pk} next={handleNext} />;
+                return <Details pk={pk} next={handleNext} prev={handleClick} />;
             case 3:
                 return <FinalNursery Customer_pk={pk} />;
             default:

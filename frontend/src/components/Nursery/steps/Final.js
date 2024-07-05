@@ -159,11 +159,12 @@ export default function FinalNursery({ Customer_pk }) {
                 autoFocus
                 onChange={show}
                 ref={pkRef}
+                required
               />
 
               <datalist id="nursey-list">
                 {nursery.map(item => (
-                  <option key={item.beverageId} value={item.nursery_pk}>{item.nursery_pk}-{item.name}</option>
+                  <option key={item.nursery_pk} value={item.nursery_pk}>{item.nursery_pk}-{item.name}</option>
                 ))}
               </datalist>
 
