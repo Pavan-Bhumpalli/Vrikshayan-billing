@@ -13,8 +13,12 @@ const AllUsers = () => {
 
   useEffect(() => {
     const loadUsers = async () => {
-      const response = await axios.get('http://localhost:5000/users');
-      setData(response.data);
+      try {
+        const response = await axios.get('http://localhost:5000/users');
+        setData(response.data);
+      } catch (error) {
+        console.error("Error loading users:", error);
+      }
     }
     loadUsers();
   }, []);
@@ -28,15 +32,28 @@ const AllUsers = () => {
     });
   }
 
+  const isValidMobileNumber = (mobile) => {
+    const mobileRegex = /^[0-9]{10}$/;
+    return mobileRegex.test(mobile);
+  }
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  
+
   const AddNewUser = () => {
     swal.fire({
       title: 'Add New User',
       html: `
-        <input type='text' id='name' class='swal2-input' placeholder='Username' autoFocus>
-        <input type='email' id='email' class='swal2-input' placeholder='Email'>
-        <input type='number' id='mobile' class='swal2-input' placeholder='Mobile Number'>
-        <input type='password' id='password' class='swal2-input' placeholder='Password'>
-        <input type='password' id='confirmpassword' class='swal2-input' placeholder='Confirm Password'>
+      <form>
+        <input type='text' id='name' class='swal2-input' placeholder='Username' autoFocus required>
+        <input type='email' id='email' class='swal2-input' placeholder='Email' required>
+        <input type='number' id='mobile' class='swal2-input' placeholder='Mobile Number' required>
+        <input type='password' id='password' class='swal2-input' placeholder='Password' required>
+        <input type='password' id='confirmpassword' class='swal2-input' placeholder='Confirm Password' required>
+        </form>
       `,
       showCancelButton: true,
       confirmButtonText: 'Add User',
@@ -47,6 +64,34 @@ const AllUsers = () => {
         const mobile = document.getElementById('mobile').value;
         const confirmpassword = document.getElementById('confirmpassword').value;
         let res = null;
+
+        if (!name || !email || !mobile || !password || !confirmpassword) {
+          swal.fire({
+            title: 'Error',
+            text: 'All fields are required.',
+            icon: 'error'
+          });
+          return false;
+        }
+
+        if (!isValidEmail(email)) {
+          swal.fire({
+            title: 'Error',
+            text: 'Please enter a valid email address.',
+            icon: 'error'
+          });
+          return false;
+        }
+
+        if (!isValidMobileNumber(mobile)) {
+          swal.fire({
+            title: 'Error',
+            text: 'Please enter a valid 10-digit mobile number.',
+            icon: 'error'
+          });
+          return false;
+        }
+
         try {
           res = await axios.post('http://localhost:5000/register', {
             name,
@@ -77,9 +122,10 @@ const AllUsers = () => {
           }
           window.location.reload();
         } catch (err) {
+          console.log(err);
           swal.fire({
             title: 'Error',
-            text: 'Something went wrong',
+            text: err.response ? err.response.data : 'Something went wrong',
             icon: 'error'
           });
         }
@@ -103,6 +149,34 @@ const AllUsers = () => {
         const email = document.getElementById('edit-email').value;
         const password = document.getElementById('edit-password').value;
         const mobile = document.getElementById('edit-mobile').value;
+
+        if (!name || !email || !mobile || !password) {
+          swal.fire({
+            title: 'Error',
+            text: 'All fields are required.',
+            icon: 'error'
+          });
+          return false;
+        }
+
+        if (!isValidEmail(email)) {
+          swal.fire({
+            title: 'Error',
+            text: 'Please enter a valid email address.',
+            icon: 'error'
+          });
+          return false;
+        }
+
+        if (!isValidMobileNumber(mobile)) {
+          swal.fire({
+            title: 'Error',
+            text: 'Please enter a valid 10-digit mobile number.',
+            icon: 'error'
+          });
+          return false;
+        }
+
         try {
           const res = await axios.put(`http://localhost:5000/updateUser/${user._id}`, {
             name,
@@ -127,7 +201,7 @@ const AllUsers = () => {
         } catch (err) {
           swal.fire({
             title: 'Error',
-            text: 'Something went wrong',
+            text: err.response ? err.response.data : 'Something went wrong',
             icon: 'error'
           });
         }
@@ -171,7 +245,7 @@ const AllUsers = () => {
       } catch (err) {
         swal.fire({
           title: 'Error',
-          text: 'Something went wrong',
+          text: err.response ? err.response.data : 'Something went wrong',
           icon: 'error'
         });
       }
@@ -184,11 +258,11 @@ const AllUsers = () => {
   );
 
   return (
-    <div className='flex'>
+    <div className='flex h-screen'>
       <AdminSidebar />
       <div className='flex flex-col p-8 ml-[20%] w-[80%]'>
-        <div className='flex  justify-end mb-4 gap-3'>
-        <input
+        <div className='flex justify-end mb-4 gap-3'>
+          <input
             type="text"
             placeholder="Search..."
             value={searchQuery}
@@ -199,7 +273,6 @@ const AllUsers = () => {
             <MdAdd className='inline w-6 h-6 mr-2' />
             <span>Create User</span>
           </button>
-          
         </div>
         <div className='overflow-x-auto'>
           <table className='min-w-full bg-white shadow-md rounded'>
@@ -229,7 +302,7 @@ const AllUsers = () => {
                   </td>
                   <td className='py-2 px-4 border'>
                     <center>
-                      <MdDelete className='text-red-500 cursor-pointer' onClick={() => { deleteUser(user._id) }} />
+                      <MdDelete className='text-red-500 cursor-pointer' onClick={() => { deleteUser(user._id) }} size={23}/>
                     </center>
                   </td>
                 </tr>

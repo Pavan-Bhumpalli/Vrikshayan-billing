@@ -31,17 +31,22 @@ const AdminActivities = ({ type, inp, del, update }) => {
         const { value: formValues } = await swal.fire({
             title: 'Add New Item',
             html: `
-                <input type='text' id='name' class='swal2-input' placeholder='Name'>
-                <input type='number' id='cost' class='swal2-input' placeholder='Cost'>
+                <input type='text' id='name' class='swal2-input' placeholder='Name' required>
+                <input type='number' id='cost' class='swal2-input' placeholder='Cost' required>
             `,
             focusConfirm: false,
             showCancelButton: true,
             confirmButtonText: 'Add Item',
             preConfirm: () => {
-                return {
-                    name: document.getElementById('name').value,
-                    cost: document.getElementById('cost').value
+                const name = document.getElementById('name').value;
+                const cost = document.getElementById('cost').value;
+
+                if (!name || !cost) {
+                    swal.showValidationMessage('Please enter both name and cost');
+                    return false;
                 }
+
+                return { name, cost };
             }
         });
 
@@ -94,6 +99,11 @@ const AdminActivities = ({ type, inp, del, update }) => {
     };
 
     const handleSaveClick = async (item_pk) => {
+        if (!editFormData.name || !editFormData.cost) {
+            swal.fire('Error', 'Please enter both name and cost', 'error');
+            return;
+        }
+
         try {
             const response = await axios.put(`http://localhost:5000/${update}/${item_pk}`, editFormData);
             if (response.status === 200) {
