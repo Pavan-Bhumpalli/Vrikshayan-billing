@@ -66,7 +66,7 @@ const AdminSidebar = () => {
           <FaPaintBrush className='inline w-6 h-6'/>
           <p>DIY</p>
         </a>
-        <a href='/beveragesAdmin' className={`flex gap-2 w-full p-4 ${activeItem === 'beverages' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('beverages')}>
+        <a href='/bevaragesAdmin' className={`flex gap-2 w-full p-4 ${activeItem === 'beverages' ? 'text-green-800 bg-white' : ' hover:bg-green-500 text-white'}`} onClick={() => handleItemClick('beverages')}>
           <RiDrinks2Fill className='inline w-6 h-6'/>
           <p>BEVERAGES</p>
         </a>
