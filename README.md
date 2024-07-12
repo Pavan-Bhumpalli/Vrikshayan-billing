@@ -1,6 +1,5 @@
 # Vrikshayan Billing
 
-### Expanded and Reframed Description
 
 **Vrikshayan Billing** is an administrative web application designed to manage billing and customer interactions for an offline farm offering nature-centric activities. 
 This application streamlines the process of logging visitor activities, generating bills, and managing customer data. 
