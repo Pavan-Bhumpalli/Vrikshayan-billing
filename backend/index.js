@@ -5,19 +5,24 @@ const app = express();
 const configJSON = require("./config.json");
 
 const user_crud = require("./CRUD/UserCRUD/user_crud");
-const customer_crud=require("./CRUD/CustomerCRUD/customer_crud");
-const customer_add_crud=require("./CRUD/CustomerCRUD/AddItems");
-const nursery_crud=require("./CRUD/NurseryCRUD/nursery_crud");
-const beverages_crud=require("./CRUD/BeveragesCRUD/beverages_crud");
-const farmproduce_crud=require("./CRUD/FarmProduceCRUD/farmproduce_crud");
-const diy_crud=require("./CRUD/DIYCRUD/diy_crud");
-
+const customer_crud = require("./CRUD/CustomerCRUD/customer_crud");
+const customer_add_crud = require("./CRUD/CustomerCRUD/AddItems");
+const nursery_crud = require("./CRUD/NurseryCRUD/nursery_crud");
+const beverages_crud = require("./CRUD/BeveragesCRUD/beverages_crud");
+const farmproduce_crud = require("./CRUD/FarmProduceCRUD/farmproduce_crud");
+const diy_crud = require("./CRUD/DIYCRUD/diy_crud");
 
 mongoose.connect(configJSON.mongodbURI).then(() => {
     console.log("Connected to MongoDB");
-})
+});
 
-app.use(cors());
+// Configure CORS to allow requests from your frontend's origin
+const corsOptions = {
+    origin: 'http://localhost:3000', // Replace with your frontend's origin
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -28,8 +33,8 @@ app.use("/", nursery_crud);
 app.use("/", beverages_crud);
 app.use("/", farmproduce_crud);
 app.use("/", diy_crud);
-app.get("/customers/:month/:year", async (req, res) => {
 
+app.get("/customers/:month/:year", async (req, res) => {
     try {
         const month = parseInt(req.params.month);
         const year = parseInt(req.params.year);
@@ -37,7 +42,6 @@ app.get("/customers/:month/:year", async (req, res) => {
 
         const startDate = new Date(year, month - 1, 1); 
         const endDate = new Date(year, month, 0, 23, 59, 59);
-
 
         const foundCustomers = await customer.find({
             createdAt: {

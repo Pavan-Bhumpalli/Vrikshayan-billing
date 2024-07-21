@@ -19,7 +19,7 @@ const Details = () => {
     }
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/getCustomers');
+        const response = await fetch('https://vrikshayan-billing-api.vercel.app/getCustomers');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

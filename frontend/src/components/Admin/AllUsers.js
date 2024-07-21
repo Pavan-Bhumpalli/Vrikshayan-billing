@@ -21,7 +21,7 @@ const AllUsers = () => {
         {
           window.location.href="/loginerror";
         }
-        const response = await axios.get('http://localhost:5000/users');
+        const response = await axios.get('https://vrikshayan-billing-api.vercel.app/users');
         setData(response.data);
       } catch (error) {
         console.error("Error loading users:", error);
@@ -100,7 +100,7 @@ const AllUsers = () => {
         }
 
         try {
-          res = await axios.post('http://localhost:5000/register', {
+          res = await axios.post('https://vrikshayan-billing-api.vercel.app/register', {
             name,
             email,
             mobile,
@@ -185,7 +185,7 @@ const AllUsers = () => {
         }
 
         try {
-          const res = await axios.put(`http://localhost:5000/updateUser/${user._id}`, {
+          const res = await axios.put(`https://vrikshayan-billing-api.vercel.app/updateUser/${user._id}`, {
             name,
             email,
             mobile,
@@ -234,7 +234,7 @@ const AllUsers = () => {
 
     if (result.isConfirmed) {
       try {
-        const res = await axios.delete(`http://localhost:5000/deleteUser/${id}`);
+        const res = await axios.delete(`https://vrikshayan-billing-api.vercel.app/deleteUser/${id}`);
         if (res.data.error) {
           swal.fire({
             title: 'Error',

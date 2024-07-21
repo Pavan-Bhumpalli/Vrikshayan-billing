@@ -10,7 +10,7 @@ const FinalDiy = ({ Customer_pk }) => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await axios("http://localhost:5000/getDIYItems");
+        const res = await axios("https://vrikshayan-billing-api.vercel.app/getDIYItems");
         setItems(res.data);
       } catch (err) {
         console.log(err);
@@ -56,7 +56,7 @@ const FinalDiy = ({ Customer_pk }) => {
   const handleSubmit = async () => {
     const selectedData = items.filter((item, index) => selectedItems.includes(index));
     try {
-      await axios.put(`http://localhost:5000/customer/diy/${Customer_pk}`, selectedData);
+      await axios.put(`https://vrikshayan-billing-api.vercel.app/customer/diy/${Customer_pk}`, selectedData);
       Swal.fire({
         text: "Nursery Items Updated Successfully!",
         icon: "success"

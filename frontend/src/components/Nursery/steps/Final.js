@@ -70,7 +70,7 @@ export default function FinalNursery({ Customer_pk }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('http://localhost:5000/getNurseryItems');
+      const res = await axios.get('https://vrikshayan-billing-api.vercel.app/getNurseryItems');
       console.log("res:", res.data);
       setNursery(res.data);
     };

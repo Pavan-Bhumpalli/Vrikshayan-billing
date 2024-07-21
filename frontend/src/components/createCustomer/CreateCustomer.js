@@ -36,7 +36,7 @@ const CreateCustomer = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/createCustomer', data);
+            const response = await axios.post('https://vrikshayan-billing-api.vercel.app/createCustomer', data);
             console.log(response.data);
 
             MySwal.fire({

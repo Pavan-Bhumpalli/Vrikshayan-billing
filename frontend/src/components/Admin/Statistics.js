@@ -35,7 +35,7 @@ const Statistics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/customers/${month}/${year}`);
+        const response = await axios.get(`https://vrikshayan-billing-api.vercel.app/customers/${month}/${year}`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

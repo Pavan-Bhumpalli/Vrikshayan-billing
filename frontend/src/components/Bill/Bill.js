@@ -8,7 +8,7 @@ const Bill = () => {
   const location = useLocation();
   const { Customer_id } = location.state || {};
   const [data, setData] = useState({});
-  const [sno, setSno] = useState(1); // State for sequential numbering
+  const [sno, setSno] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   let token=null;
 
@@ -20,7 +20,7 @@ const Bill = () => {
         {
             window.location.href="/loginerror";
         }
-        const response = await fetch(`http://localhost:5000/getCustomer/${Customer_id}`);
+        const response = await fetch(`https://vrikshayan-billing-api.vercel.app/getCustomer/${Customer_id}`);
         if (!response.ok) {
           Swal.fire({
             text: `Customer not found`,

@@ -27,7 +27,7 @@ const Lunch = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/getCustomer/${inputValue}`);
+      const response = await fetch(`https://vrikshayan-billing-api.vercel.app/getCustomer/${inputValue}`);
       if (!response.ok) {
         Swal.fire({
           text: `Customer ${response.statusText}`,
@@ -50,7 +50,7 @@ const Lunch = () => {
   const updatelunchsCount = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:5000/customer/lunch/${inputValue}`, { lunchCount });
+      const response = await axios.put(`https://vrikshayan-billing-api.vercel.app/customer/lunch/${inputValue}`, { lunchCount });
       setCustomerData(response.data);
       Swal.fire({
         text: "Lunch Count Updated Successfully!",

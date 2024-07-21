@@ -23,7 +23,7 @@ const AdminActivities = ({ type, inp, del, update }) => {
     },[]);
 
     const loadUsers = async () => {
-        const response = await axios.get(`http://localhost:5000/${type}`);
+        const response = await axios.get(`https://vrikshayan-billing-api.vercel.app/${type}`);
         setData(response.data);
     };
 
@@ -62,7 +62,7 @@ const AdminActivities = ({ type, inp, del, update }) => {
 
         if (formValues) {
             try {
-                const response = await axios.post(`http://localhost:5000/${inp}`, formValues);
+                const response = await axios.post(`https://vrikshayan-billing-api.vercel.app/${inp}`, formValues);
                 setData(prevData => [...prevData, response.data]);
                 swal.fire('Added!', 'Your item has been added.', 'success');
             } catch (error) {
@@ -82,7 +82,7 @@ const AdminActivities = ({ type, inp, del, update }) => {
         });
         if (result.isConfirmed) {
             try {
-                const response = await axios.delete(`http://localhost:5000/${del}/${item_pk}`);
+                const response = await axios.delete(`https://vrikshayan-billing-api.vercel.app/${del}/${item_pk}`);
                 if (response.status === 200) {
                     swal.fire('Deleted!', 'Your item has been deleted.', 'success');
                     loadUsers();
@@ -115,7 +115,7 @@ const AdminActivities = ({ type, inp, del, update }) => {
         }
 
         try {
-            const response = await axios.put(`http://localhost:5000/${update}/${item_pk}`, editFormData);
+            const response = await axios.put(`https://vrikshayan-billing-api.vercel.app/${update}/${item_pk}`, editFormData);
             if (response.status === 200) {
                 const updatedData = data.map(item =>
                     (item.nursery_pk || item.item_pk || item.beverageId || item.produce_pk || item.diy_pk) === item_pk ? { ...item, ...editFormData } : item

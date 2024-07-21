@@ -67,7 +67,7 @@ export default function FinalBeverages({ Customer_pk }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios.get('http://localhost:5000/getBeverages');
+            const res = await axios.get('https://vrikshayan-billing-api.vercel.app/getBeverages');
             console.log("res:", res.data);
             setNursery(res.data);
         };
@@ -124,7 +124,7 @@ export default function FinalBeverages({ Customer_pk }) {
     const UpdateItems = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.put(`http://localhost:5000/customer/beverages/${Customer_pk}`, data);
+            const res = await axios.put(`https://vrikshayan-billing-api.vercel.app/customer/beverages/${Customer_pk}`, data);
             Swal.fire({
                 text: "Nursery Items Updated Successfully!",
                 icon: "success"

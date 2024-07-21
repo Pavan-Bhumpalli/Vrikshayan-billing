@@ -31,7 +31,7 @@ const Login = () => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:5000/login', data);
+      const response = await axios.post('https://vrikshayan-billing-api.vercel.app/login', data);
       localStorage.setItem('token', response.data.token);
       Swal.fire({
         title: "Login Successful!",
