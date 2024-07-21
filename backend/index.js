@@ -16,9 +16,8 @@ mongoose.connect(configJSON.mongodbURI).then(() => {
     console.log("Connected to MongoDB");
 });
 
-// Configure CORS to allow requests from your frontend's origin
 const corsOptions = {
-    origin: 'http://localhost:3000', // Replace with your frontend's origin
+    origin: 'https://vrikshayan-billing.vercel.app', 
     optionsSuccessStatus: 200
 };
 
