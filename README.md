@@ -29,6 +29,7 @@ To get started with Vrikshayan Billing, follow these steps:
 2. **Install the necessary packages:**
 
     ```bash
+    cd backend
     npm install
     cd frontend
     npm install
@@ -40,5 +41,6 @@ To get started with Vrikshayan Billing, follow these steps:
 To start the application, run:
 
 ```bash
+cd backend
 npm start
 ```
