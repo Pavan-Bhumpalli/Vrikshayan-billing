@@ -8,7 +8,7 @@ const Details = ({ pk, next, prev }) => {
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/getCustomer/${pk}`);
+      const response = await axios.get(`https://vrikshayan-billing-api.vercel.app/getCustomer/${pk}`);
       setUserData(response.data);
     } catch (error) {
       Swal.fire({

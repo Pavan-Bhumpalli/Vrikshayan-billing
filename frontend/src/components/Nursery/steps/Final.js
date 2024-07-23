@@ -131,7 +131,7 @@ export default function FinalNursery({ Customer_pk }) {
   const UpdateItems = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`http://localhost:5000/customer/nursery/${Customer_pk}`, data);
+      const res = await axios.put(`https://vrikshayan-billing-api.vercel.app/customer/nursery/${Customer_pk}`, data);
       Swal.fire({
         text: "Nursery Items Updated Successfully!",
         icon: "success"
