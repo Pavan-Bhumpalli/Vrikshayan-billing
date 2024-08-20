@@ -3,6 +3,7 @@ import image from './Images/logo.png';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import backendUrl from '../../backendUrl.json';
 
 const Register = () => {
   const [data, setData] = useState({
@@ -16,7 +17,7 @@ const Register = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/register', data);
+      const response = await axios.post(`${backendUrl.backend_url}/register`, data);
       Swal.fire({
         title: "User Registered Successfully",
         icon: "success"

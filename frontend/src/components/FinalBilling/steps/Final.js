@@ -4,6 +4,7 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { MdOutlineDelete } from 'react-icons/md';
+import backendUrl from '../../../backendUrl.json';
 
 export default function FinalBilling({ Customer_pk }) {
   const navigate = useNavigate();
@@ -75,8 +76,7 @@ export default function FinalBilling({ Customer_pk }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('https://vrikshayan-billing-api.vercel.app/getFarmProduces');
-      console.log('res:', res.data);
+      const res = await axios.get(`${backendUrl.backend_url}/getFarmProduces`);
       setBilling(res.data);
     };
 
@@ -92,10 +92,10 @@ export default function FinalBilling({ Customer_pk }) {
     setData([...data, { produce_pk, name, quantity, price }]);
 
     e.target[0].value = '';
-    e.target[1].value = '1'; // Reset quantity to 1
+    e.target[1].value = '1';
     setName('');
     setPrice('');
-    setQuantity(1); // Reset quantity state to 1
+    setQuantity(1);
     total.innerText = '';
 
     pkRef.current.focus();
@@ -106,7 +106,6 @@ export default function FinalBilling({ Customer_pk }) {
     const quantity = parseFloat(form[1].value);
     setQuantity(quantity);
     const total = document.getElementById('total');
-    console.log('quantity:', quantity, 'price:', price);
     if (!isNaN(quantity) && !isNaN(price)) {
       total.innerText = Math.round(quantity * price);
     } else {
@@ -116,18 +115,17 @@ export default function FinalBilling({ Customer_pk }) {
 
   const show = (e) => {
     const pk = e.target.value;
-    console.log('billing data:', billing);
     const item = billing.find((item) => item.produce_pk == pk);
     const total = document.getElementById('total');
     if (item) {
       setName(item.name);
-      setPrice(item.price);
-      setQuantity(1); // Ensure the quantity is set to 1 when a new item is selected
-      total.innerText = Math.round(item.price);
+      setPrice(item.cost);
+      setQuantity(1);
+      total.innerText = Math.round(item.cost);
     } else {
       setName('');
       setPrice('');
-      setQuantity(1); // Reset quantity to 1 if item not found
+      setQuantity(1);
       total.innerText = "";
     }
   };
@@ -135,7 +133,7 @@ export default function FinalBilling({ Customer_pk }) {
   const UpdateItems = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`https://vrikshayan-billing-api.vercel.app/customer/farmProduce/${Customer_pk}`, data);
+      const res = await axios.put(`${backendUrl.backend_url}/customer/farmProduce/${Customer_pk}`, data);
       Swal.fire({
         text: 'Nursery Items Updated Successfully!',
         icon: 'success',

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Logout from '../Logout';
 import { RiMovie2Fill } from 'react-icons/ri';
+import backendUrl from '../../backendUrl.json';
 
 const Movie = () => {
   const [inputValue, setInputValue] = useState('');
@@ -27,7 +28,7 @@ const Movie = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`https://vrikshayan-billing-api.vercel.app/getCustomer/${inputValue}`);
+      const response = await fetch(`${backendUrl.backend_url}/getCustomer/${inputValue}`);
       if (!response.ok) {
         Swal.fire({
           text: `Customer ${response.statusText}`,
@@ -48,7 +49,7 @@ const Movie = () => {
   const updateMoviesCount = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.put(`https://vrikshayan-billing-api.vercel.app/customer/movies/${inputValue}`, { movieCount });
+      const response = await axios.put(`${backendUrl.backend_url}/customer/movies/${inputValue}`, { movieCount });
       setCustomerData(response.data);
       Swal.fire({
         text: "Movies Count Updated Successfully!",

@@ -4,6 +4,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { PiBowlFoodBold } from 'react-icons/pi';
 import Logout from '../Logout';
+import backendUrl from '../../backendUrl.json';
+
 
 const Lunch = () => {
   const [inputValue, setInputValue] = useState('');
@@ -27,7 +29,7 @@ const Lunch = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`https://vrikshayan-billing-api.vercel.app/getCustomer/${inputValue}`);
+      const response = await fetch(`${backendUrl.backend_url}/getCustomer/${inputValue}`);
       if (!response.ok) {
         Swal.fire({
           text: `Customer ${response.statusText}`,
@@ -50,7 +52,7 @@ const Lunch = () => {
   const updatelunchsCount = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.put(`https://vrikshayan-billing-api.vercel.app/customer/lunch/${inputValue}`, { lunchCount });
+      const response = await axios.put(`${backendUrl.backend_url}/customer/lunch/${inputValue}`, { lunchCount });
       setCustomerData(response.data);
       Swal.fire({
         text: "Lunch Count Updated Successfully!",

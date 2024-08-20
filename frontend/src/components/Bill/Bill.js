@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
 import topImage from './Images/top.png';
+import backendUrl from '../../backendUrl.json';
 
 const Bill = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Bill = () => {
         {
             window.location.href="/loginerror";
         }
-        const response = await fetch(`https://vrikshayan-billing-api.vercel.app/getCustomer/${Customer_id}`);
+        const response = await fetch(`${backendUrl.backend_url}/getCustomer/${Customer_id}`);
         if (!response.ok) {
           Swal.fire({
             text: `Customer not found`,

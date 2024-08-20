@@ -59,7 +59,7 @@ function ActivityInfo({ id, type, rowData }) {
               {Array.isArray(activityData) && activityData.length > 0 ? (
                 activityData.map((item, index) => (
                   <tr key={index} className="border-b">
-                    <td className="px-4 py-2">{item.diy_pk || item.item_Pk}</td>
+                    <td className="px-4 py-2">{item.item_pk || item.item_Pk}</td>
                     <td className="px-4 py-2">{item.name}</td>
                     <td className="px-4 py-2">{item.cost || item.price}</td>
                     <td className="px-4 py-2">{item.count || item.quantity}</td>

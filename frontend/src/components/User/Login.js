@@ -3,6 +3,7 @@ import axios from 'axios';
 import image from './Images/logo.png';
 import {  Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import backendUrl from '../../backendUrl.json';
 
 const Login = () => {
   const [data, setData] = useState({
@@ -31,7 +32,7 @@ const Login = () => {
       return;
     }
     try {
-      const response = await axios.post('https://vrikshayan-billing-api.vercel.app/login', data);
+      const response = await axios.post(`${backendUrl.backend_url}/login`, data);
       localStorage.setItem('token', response.data.token);
       Swal.fire({
         title: "Login Successful!",

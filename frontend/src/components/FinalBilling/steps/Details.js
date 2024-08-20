@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import backendUrl from '../../../backendUrl.json';
 
 
 const Details = ({ pk, next, prev }) => {
@@ -8,7 +9,7 @@ const Details = ({ pk, next, prev }) => {
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`https://vrikshayan-billing-api.vercel.app/getCustomer/${pk}`);
+      const response = await axios.get(`${backendUrl.backend_url}/getCustomer/${pk}`);
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

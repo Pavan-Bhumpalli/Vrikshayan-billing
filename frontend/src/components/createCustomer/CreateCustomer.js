@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Sidebar from '../Sidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -7,66 +7,76 @@ import QRCode from 'react-qr-code';
 import bgImage from './Images/background_id.png';
 import topImage from './Images/top.png';
 import Logout from '../Logout';
+import backendUrl from '../../backendUrl.json';
 
 const MySwal = withReactContent(Swal);
 
 const CreateCustomer = () => {
     const [data, setData] = useState({
         name: '',
-        phoneNumber: 0,
-        peopleCount: 0,
+        phoneNumber: '',
+        peopleCount: '',
         activities: {
             movieCount: 0,
             lunchCount: 0,
-            diyCount:[],
-            beverages:[],
-            farmProduce:[]
+            diyCount: [],
+            beverages: [],
+            farmProduce: []
         }
     });
-    let token=null;
-    useEffect(() => {
-        token=localStorage.getItem('token');
-        if(!token)
-        {
-            window.location.href="/loginerror";
-        }
 
-    },[]);
+    const nameRef = useRef(null);
+    const phoneRef = useRef(null);
+    const countRef = useRef(null);
+
+    let token = null;
+
+    useEffect(() => {
+        token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = "/loginerror";
+        }
+    }, []);
 
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://vrikshayan-billing-api.vercel.app/createCustomer', data);
+            const response = await axios.post(`${backendUrl.backend_url}/createCustomer`, data);
             console.log(response.data);
 
             MySwal.fire({
                 html: (
                     <div className='flex justify-center'>
-                        <div 
-                        id="printableArea" 
-                        style={{ 
-                            width: '50mm', 
-                            height: '85mm',     
-                            backgroundImage: `url(${bgImage})`, 
-                            backgroundSize: 'cover', 
-                            display: 'flex', 
-                            flexDirection: 'column', 
-                            alignItems: 'center', 
-                            position: 'relative'
-                        }}
-                    >
-                        <img src={topImage} alt="Top Image" style={{ position: 'absolute', top: '10mm', width: '60%' }} className='pt-3'/>
-                        <div style={{ marginTop: '30mm' }} className='flex flex-col justify-center items-center'>
-                            <QRCode value={String(response.data.pk)} size={100} />
-                            <p className='font-bold text-lg p-3' id='name'>{data.name}</p>
-                        </div>
+                        <div
+                            id="printableArea"
+                            style={{
+                                width: '50mm',
+                                height: '85mm',
+                                backgroundImage: `url(${bgImage})`,
+                                backgroundSize: 'cover',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                position: 'relative'
+                            }}
+                        >
+                            <img src={topImage} alt="Top Image" style={{ position: 'absolute', top: '10mm', width: '60%' }} className='pt-3' />
+                            <div style={{ marginTop: '30mm' }} className='flex flex-col justify-center items-center'>
+                                <QRCode value={String(response.data.pk)} size={100} />
+                                <p className='font-bold text-lg p-3' id='name'>{data.name}</p>
+                            </div>
                         </div>
                     </div>
                 ),
                 showCancelButton: true,
                 confirmButtonText: 'Print',
                 cancelButtonText: 'Close',
-                preConfirm: () => {
+            }).then((result) => {
+                if (result.isDismissed) {
+                    nameRef.current.value = '';
+                    phoneRef.current.value = '';
+                    countRef.current.value = '';
+                } else if (result.isConfirmed) {
                     const printableArea = document.getElementById('printableArea');
                     const originalContents = document.body.innerHTML;
                     document.body.innerHTML = printableArea.outerHTML;
@@ -83,8 +93,7 @@ const CreateCustomer = () => {
                           background-image: url('${bgImage}') !important;
                           background-size: cover !important;
                         }
-                        #name
-                        {
+                        #name {
                             text-align: center;
                         }
                       }
@@ -93,12 +102,13 @@ const CreateCustomer = () => {
 
                     window.print();
                     document.body.innerHTML = originalContents;
-                    window.location.reload(); // Reload the page to restore the original content
+                    window.location.reload();
                 }
             });
+
         } catch (error) {
             console.error('Error creating customer:', error);
-            alert('Failed to create customer. Please try again later.'); // show error message
+            alert('Failed to create customer. Please try again later.');
         }
     };
 
@@ -114,7 +124,7 @@ const CreateCustomer = () => {
                 <div className='bg-[#b2dba9] p-10 rounded-lg shadow-2xl w-full max-w-xl'>
                     <h1 className='font-bold text-2xl'>Create Customer</h1>
                     <br></br>
-                    <form className='flex flex-col space-y-6' onSubmit={submitHandler}>
+                    <form className='flex flex-col space-y-6' onSubmit={submitHandler} id='form'>
                         <div className='flex flex-col'>
                             <label className='font-semibold text-lg text-gray-700 mb-2'>Customer Name:</label>
                             <input
@@ -122,6 +132,7 @@ const CreateCustomer = () => {
                                 name="name"
                                 value={data.name}
                                 onChange={handleInputChange}
+                                ref={nameRef}
                                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500'
                             />
                         </div>
@@ -130,7 +141,9 @@ const CreateCustomer = () => {
                             <input
                                 type="text"
                                 name="phoneNumber"
+                                value={data.phoneNumber}
                                 onChange={handleInputChange}
+                                ref={phoneRef}
                                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500'
                             />
                         </div>
@@ -139,7 +152,9 @@ const CreateCustomer = () => {
                             <input
                                 type="number"
                                 name="peopleCount"
+                                value={data.peopleCount}
                                 onChange={handleInputChange}
+                                ref={countRef}
                                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500'
                             />
                         </div>

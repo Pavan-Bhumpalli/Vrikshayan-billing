@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import { MdDeleteOutline } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import Logout from './Logout';
+import backendUrl from '../../backendUrl.json';
 
 const AdminActivities = ({ type, inp, del, update }) => {
     const [data, setData] = useState([]);
@@ -23,7 +24,7 @@ const AdminActivities = ({ type, inp, del, update }) => {
     },[]);
 
     const loadUsers = async () => {
-        const response = await axios.get(`https://vrikshayan-billing-api.vercel.app/${type}`);
+        const response = await axios.get(`${backendUrl.backend_url}/${type}`);
         setData(response.data);
     };
 
@@ -62,7 +63,7 @@ const AdminActivities = ({ type, inp, del, update }) => {
 
         if (formValues) {
             try {
-                const response = await axios.post(`https://vrikshayan-billing-api.vercel.app/${inp}`, formValues);
+                const response = await axios.post(`${backendUrl.backend_url}/${inp}`, formValues);
                 setData(prevData => [...prevData, response.data]);
                 swal.fire('Added!', 'Your item has been added.', 'success');
             } catch (error) {
@@ -82,7 +83,7 @@ const AdminActivities = ({ type, inp, del, update }) => {
         });
         if (result.isConfirmed) {
             try {
-                const response = await axios.delete(`https://vrikshayan-billing-api.vercel.app/${del}/${item_pk}`);
+                const response = await axios.delete(`${backendUrl.backend_url}/${del}/${item_pk}`);
                 if (response.status === 200) {
                     swal.fire('Deleted!', 'Your item has been deleted.', 'success');
                     loadUsers();
@@ -115,7 +116,7 @@ const AdminActivities = ({ type, inp, del, update }) => {
         }
 
         try {
-            const response = await axios.put(`https://vrikshayan-billing-api.vercel.app/${update}/${item_pk}`, editFormData);
+            const response = await axios.put(`${backendUrl.backend_url}/${update}/${item_pk}`, editFormData);
             if (response.status === 200) {
                 const updatedData = data.map(item =>
                     (item.nursery_pk || item.item_pk || item.beverageId || item.produce_pk || item.diy_pk) === item_pk ? { ...item, ...editFormData } : item

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import backendUrl from '../../../backendUrl.json';
 
 const FinalDiy = ({ Customer_pk }) => {
   const [items, setItems] = useState([]);
@@ -10,7 +11,7 @@ const FinalDiy = ({ Customer_pk }) => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await axios("https://vrikshayan-billing-api.vercel.app/getDIYItems");
+        const res = await axios(`${backendUrl.backend_url}/getDIYItems`);
         setItems(res.data);
       } catch (err) {
         console.log(err);
@@ -56,7 +57,7 @@ const FinalDiy = ({ Customer_pk }) => {
   const handleSubmit = async () => {
     const selectedData = items.filter((item, index) => selectedItems.includes(index));
     try {
-      await axios.put(`https://vrikshayan-billing-api.vercel.app/customer/diy/${Customer_pk}`, selectedData);
+      await axios.put(`${backendUrl.backend_url}/customer/diy/${Customer_pk}`, selectedData);
       Swal.fire({
         text: "Nursery Items Updated Successfully!",
         icon: "success"

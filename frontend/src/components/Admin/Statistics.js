@@ -3,6 +3,7 @@ import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
 import Logout from './Logout';
 import { PieChart, Pie, Tooltip, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LineChart, Line } from 'recharts';
+import backendUrl from '../../backendUrl.json';
 
 const Statistics = () => {
   const currentDate = new Date();
@@ -35,7 +36,7 @@ const Statistics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://vrikshayan-billing-api.vercel.app/customers/${month}/${year}`);
+        const response = await axios.get(`${backendUrl.backend_url}/customers/${month}/${year}`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -7,6 +7,7 @@ import swal from 'sweetalert2';
 import { MdDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import Logout from './Logout';
+import backendUrl from '../../backendUrl.json';
 
 const AllUsers = () => {
   const [data, setData] = useState([]);
@@ -21,7 +22,7 @@ const AllUsers = () => {
         {
           window.location.href="/loginerror";
         }
-        const response = await axios.get('https://vrikshayan-billing-api.vercel.app/users');
+        const response = await axios.get(`${backendUrl.backend_url}/users`);
         setData(response.data);
       } catch (error) {
         console.error("Error loading users:", error);
@@ -100,7 +101,7 @@ const AllUsers = () => {
         }
 
         try {
-          res = await axios.post('https://vrikshayan-billing-api.vercel.app/register', {
+          res = await axios.post('${backendUrl.backend_url}/register', {
             name,
             email,
             mobile,
@@ -185,7 +186,7 @@ const AllUsers = () => {
         }
 
         try {
-          const res = await axios.put(`https://vrikshayan-billing-api.vercel.app/updateUser/${user._id}`, {
+          const res = await axios.put(`${backendUrl.backend_url}/updateUser/${user._id}`, {
             name,
             email,
             mobile,
@@ -234,7 +235,7 @@ const AllUsers = () => {
 
     if (result.isConfirmed) {
       try {
-        const res = await axios.delete(`https://vrikshayan-billing-api.vercel.app/deleteUser/${id}`);
+        const res = await axios.delete(`${backendUrl.backend_url}/deleteUser/${id}`);
         if (res.data.error) {
           swal.fire({
             title: 'Error',

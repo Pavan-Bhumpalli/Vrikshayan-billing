@@ -3,6 +3,7 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { MdOutlineDelete } from 'react-icons/md';
+import backendUrl from '../../../backendUrl.json';
 
 export default function FinalBeverages({ Customer_pk }) {
     const columns = [
@@ -67,7 +68,7 @@ export default function FinalBeverages({ Customer_pk }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios.get('https://vrikshayan-billing-api.vercel.app/getBeverages');
+            const res = await axios.get(`${backendUrl.backend_url}/getBeverages`);
             console.log("res:", res.data);
             setNursery(res.data);
         };
@@ -124,7 +125,7 @@ export default function FinalBeverages({ Customer_pk }) {
     const UpdateItems = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.put(`https://vrikshayan-billing-api.vercel.app/customer/beverages/${Customer_pk}`, data);
+            const res = await axios.put(`${backendUrl.backend_url}/customer/beverages/${Customer_pk}`, data);
             Swal.fire({
                 text: "Nursery Items Updated Successfully!",
                 icon: "success"
