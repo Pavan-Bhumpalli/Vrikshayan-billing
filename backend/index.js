@@ -59,4 +59,5 @@ app.get("/", (req, res) => {
     res.send("Welcome to Vrikshyan!!! Enjoy Exploring");
 });
 
-app.listen(configJSON.port, () => console.log("Server is running on port http://localhost:" + configJSON.port));
+
+module.exports = app;
