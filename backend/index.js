@@ -59,5 +59,4 @@ app.get("/", (req, res) => {
     res.send("Welcome to Vrikshyan!!! Enjoy Exploring");
 });
 
-
 module.exports = app;
