@@ -16,12 +16,7 @@ mongoose.connect(configJSON.mongodbURI).then(() => {
     console.log("Connected to MongoDB");
 });
 
-const corsOptions = {
-    origin: 'https://vrikshayan-billing.vercel.app', 
-    optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
