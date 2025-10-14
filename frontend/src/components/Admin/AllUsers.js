@@ -101,7 +101,7 @@ const AllUsers = () => {
         }
 
         try {
-          res = await axios.post('${backendUrl.backend_url}/register', {
+          res = await axios.post(`${backendUrl.backend_url}/register`, {
             name,
             email,
             mobile,
