@@ -64,6 +64,13 @@ const Login = () => {
 
       <div className="w-1/2 flex flex-col justify-center items-center bg-white p-8" style={{ backgroundColor: "#93cf93" }}>
         <h1 className="text-3xl font-bold mb-8">Login</h1>
+          {/* Instruction Box */}
+        <div className="w-full mb-6 p-4 rounded bg-red-500 text-white text-sm">
+          <center>
+          <p className="mb-1"><strong>Employee Login:</strong> Use <span className="underline">pavan@gmail.com</span> as email and <span className="underline">pavan</span> as password.</p>
+          <p><strong>Admin Dashboard:</strong> Use <span className="underline">admin@gmail.com</span> as email and <span className="underline">admin</span> as password.</p>
+          </center>
+        </div>
         <form className="w-full max-w-sm" onSubmit={submitHandler}>
           <div className="mb-4">
             <label className="block text-gray-700 text-lg font-bold mb-2" htmlFor="email">
